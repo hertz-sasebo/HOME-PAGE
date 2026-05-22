@@ -57,11 +57,11 @@ address { font-style: normal; }
   white-space: nowrap;
 }
 .btn-primary {
-  background: var(--line);
+  background: var(--accent);
   color: var(--white);
-  border-color: var(--line);
+  border-color: var(--accent);
 }
-.btn-primary:hover { background: #05a847; border-color: #05a847; }
+.btn-primary:hover { background: var(--primary); border-color: var(--primary); }
 .btn-ghost {
   background: transparent;
   color: var(--white);
@@ -413,6 +413,21 @@ nav { display: flex; align-items: center; }
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.btn-reserve-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  background: var(--accent);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  padding: 0.55rem 1.3rem;
+  transition: background var(--ease);
+}
+.btn-reserve-sm:hover { background: var(--primary); }
+
 .btn-line-sm {
   display: inline-flex;
   align-items: center;
