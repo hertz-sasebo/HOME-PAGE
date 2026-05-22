@@ -1,0 +1,6 @@
+# GASファイルにはLINEトークン等のシークレットが含まれるため除外
+gas/
+
+# OS
+.DS_Store
+Thumbs.db
