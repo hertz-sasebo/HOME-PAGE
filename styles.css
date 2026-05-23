@@ -17,14 +17,14 @@
   --white:          #FFFFFF;
   --line:           #06C755;
 
-  --serif: 'Noto Serif JP', serif;
-  --en:    'Cormorant Garamond', serif;
+  --jp:    'Noto Sans JP', sans-serif;
+  --en:    'Manrope', sans-serif;
   --max-w: 1080px;
   --ease:  0.3s ease;
 }
 
 html { scroll-behavior: smooth; }
-body { font-family: var(--serif); background: var(--bg-primary); color: var(--text-primary); line-height: 1.85; font-size: 16px; }
+body { font-family: var(--jp); background: var(--bg-primary); color: var(--text-primary); line-height: 1.9; font-size: 16px; }
 img  { display: block; max-width: 100%; }
 a    { color: inherit; }
 ol, ul { list-style: none; }
@@ -46,9 +46,10 @@ address { font-style: normal; }
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 2.6rem;
-  font-family: var(--serif);
+  font-family: var(--jp);
   font-size: 0.88rem;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   cursor: pointer;
   text-decoration: none;
   border: 1px solid transparent;
@@ -89,15 +90,15 @@ address { font-style: normal; }
   display: block;
   font-family: var(--en);
   font-size: 0.78rem;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.32em;
   color: var(--accent-primary);
   margin-bottom: 1rem;
 }
 .section-head--light .section-label { color: rgba(155,123,79,0.85); }
 .section-head h2 {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 300;
-  letter-spacing: 0.12em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
 }
 .divider {
   width: 36px; height: 1px;
@@ -125,7 +126,7 @@ address { font-style: normal; }
   justify-content: space-between;
 }
 .logo {
-  font-family: var(--serif);
+  font-family: var(--jp);
   font-size: 1.55rem;
   font-weight: 300;
   color: var(--white);
@@ -247,7 +248,7 @@ nav { display: flex; align-items: center; }
   margin-bottom: 2rem;
 }
 .hero-kanji {
-  font-family: var(--serif);
+  font-family: var(--jp);
   font-size: clamp(7rem, 18vw, 12rem);
   font-weight: 300;
   line-height: 1;
@@ -278,9 +279,10 @@ nav { display: flex; align-items: center; }
 .btn-hero-reserve {
   display: inline-block;
   padding: 0.85rem 3rem;
-  font-family: var(--en);
+  font-family: var(--jp);
   font-size: 0.75rem;
-  letter-spacing: 0.32em;
+  font-weight: 500;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.88);
   border: 1px solid rgba(196,147,63,0.55);
@@ -405,7 +407,7 @@ nav { display: flex; align-items: center; }
 }
 .flow-body h3 {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.06em;
   margin-bottom: 0.5rem;
 }
@@ -505,7 +507,7 @@ nav { display: flex; align-items: center; }
   margin-bottom: 0.4rem;
 }
 .price-val small {
-  font-family: var(--serif);
+  font-family: var(--jp);
   font-size: 0.8rem;
   color: rgba(255,255,255,0.55);
   letter-spacing: 0.05em;
@@ -572,7 +574,7 @@ nav { display: flex; align-items: center; }
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--serif);
+  font-family: var(--jp);
   font-size: 0.92rem;
   color: var(--text-primary);
   letter-spacing: 0.04em;
@@ -626,7 +628,7 @@ nav { display: flex; align-items: center; }
   margin-bottom: 4rem;
 }
 .footer-logo {
-  font-family: var(--serif);
+  font-family: var(--jp);
   font-size: 1.8rem;
   font-weight: 300;
   letter-spacing: 0.18em;
@@ -809,7 +811,7 @@ nav { display: flex; align-items: center; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--serif);
+  font-family: var(--jp);
   font-size: 1.8rem;
   font-weight: 300;
   color: rgba(155,123,79,0.2);
