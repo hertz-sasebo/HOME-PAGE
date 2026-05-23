@@ -492,6 +492,7 @@
       var arc     = document.getElementById('ring-arc');
       var counter = document.getElementById('loader-counter');
       var text    = document.getElementById('loader-text');
+      var brand   = document.querySelector('.loader-brand');
       var C       = 2 * Math.PI * 38; // circumference ≈ 238.76
 
       arc.style.strokeDasharray  = C;
@@ -510,17 +511,18 @@
         var p   = ease(raw);
 
         arc.style.strokeDashoffset = C * (1 - p);
-        counter.textContent = Math.floor(p * 100);
+        counter.textContent = String(Math.floor(p * 100)).padStart(3, '0') + '%';
 
         if (raw < 1) {
           requestAnimationFrame(tick);
         } else {
           arc.style.strokeDashoffset = 0;
-          counter.textContent = '100';
+          counter.textContent = '100%';
 
           setTimeout(function () {
             counter.classList.add('hide');
             text.classList.add('show');
+            if (brand) brand.classList.add('lit');
             setTimeout(function () {
               loader.classList.add('is-done');
               loader.addEventListener('transitionend', function () {

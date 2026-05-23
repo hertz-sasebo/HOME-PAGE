@@ -789,8 +789,8 @@ nav { display: flex; align-items: center; }
 }
 .loader-ring-wrap {
   position: relative;
-  width: 112px;
-  height: 112px;
+  width: 140px;
+  height: 140px;
 }
 .loader-ring {
   width: 100%;
@@ -816,12 +816,20 @@ nav { display: flex; align-items: center; }
   align-items: center;
   justify-content: center;
   font-family: var(--heading);
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   font-weight: 400;
-  color: rgba(155,123,79,0.2);
+  color: rgba(155,123,79,0.28);
   letter-spacing: 0.05em;
   pointer-events: none;
   user-select: none;
+  text-shadow: 0 1px 8px rgba(155,123,79,0.10);
+  transition: color 0.7s ease, text-shadow 0.7s ease;
+}
+.loader-brand.lit {
+  color: var(--accent-primary);
+  text-shadow:
+    0 2px 20px rgba(155,123,79,0.22),
+    0 1px 4px  rgba(155,123,79,0.12);
 }
 .loader-foot {
   position: relative;
@@ -833,9 +841,9 @@ nav { display: flex; align-items: center; }
 }
 .loader-counter {
   font-family: var(--en);
-  font-size: 0.72rem;
-  letter-spacing: 0.35em;
-  color: rgba(155,123,79,0.65);
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  color: rgba(155,123,79,0.82);
   transition: opacity 0.45s ease;
 }
 .loader-counter.hide { opacity: 0; }
@@ -844,7 +852,7 @@ nav { display: flex; align-items: center; }
   font-family: var(--en);
   font-size: 0.92rem;
   letter-spacing: 0.16em;
-  color: var(--text-primary);
+  color: var(--accent-primary);
   font-style: italic;
   opacity: 0;
   transition: opacity 0.7s ease;
