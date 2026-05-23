@@ -12,6 +12,24 @@
 </head>
 <body>
 
+  <!-- LOADER -->
+  <div id="loader" role="status" aria-label="読み込み中">
+    <div class="loader-inner">
+      <div class="loader-ring-wrap">
+        <svg class="loader-ring" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="ring-track" cx="50" cy="50" r="38"/>
+          <circle id="ring-arc" class="ring-progress" cx="50" cy="50" r="38"
+                  transform="rotate(-90 50 50)"/>
+        </svg>
+        <span class="loader-brand" aria-hidden="true">環</span>
+      </div>
+      <div class="loader-foot">
+        <span id="loader-counter" class="loader-counter">0</span>
+        <span id="loader-text" class="loader-text">Forge your memory.</span>
+      </div>
+    </div>
+  </div>
+
   <!-- HEADER -->
   <header id="header">
     <div class="container header-inner">
@@ -369,6 +387,63 @@
         document.body.style.overflow = '';
       });
     });
+  </script>
+
+  <script>
+    // ── Loader ──────────────────────────────────────────────
+    (function () {
+      var loader = document.getElementById('loader');
+      if (!loader) return;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        loader.remove();
+        return;
+      }
+
+      var arc     = document.getElementById('ring-arc');
+      var counter = document.getElementById('loader-counter');
+      var text    = document.getElementById('loader-text');
+      var C       = 2 * Math.PI * 38; // circumference ≈ 238.76
+
+      arc.style.strokeDasharray  = C;
+      arc.style.strokeDashoffset = C;
+
+      var DURATION  = 2200;
+      var startTime = null;
+
+      function ease(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      function tick(ts) {
+        if (!startTime) startTime = ts;
+        var raw = Math.min((ts - startTime) / DURATION, 1);
+        var p   = ease(raw);
+
+        arc.style.strokeDashoffset = C * (1 - p);
+        counter.textContent = Math.floor(p * 100);
+
+        if (raw < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          arc.style.strokeDashoffset = 0;
+          counter.textContent = '100';
+
+          setTimeout(function () {
+            counter.classList.add('hide');
+            text.classList.add('show');
+            setTimeout(function () {
+              loader.classList.add('is-done');
+              loader.addEventListener('transitionend', function () {
+                loader.remove();
+              }, { once: true });
+            }, 1100);
+          }, 300);
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }());
   </script>
 </body>
 </html>
