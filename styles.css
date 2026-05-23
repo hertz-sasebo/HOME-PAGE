@@ -52,7 +52,7 @@ address { font-style: normal; }
   cursor: pointer;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background var(--ease), color var(--ease), border-color var(--ease);
+  transition: background var(--ease), color var(--ease), border-color var(--ease), transform 0.25s ease;
   white-space: nowrap;
 }
 .btn-primary {
@@ -61,16 +61,17 @@ address { font-style: normal; }
   border-color: var(--accent-primary);
 }
 .btn-primary:hover {
-  background: var(--accent-primary);
+  background: rgba(155,123,79,0.15);
   color: var(--white);
   border-color: var(--accent-primary);
+  transform: translateY(-1px);
 }
 .btn-ghost {
   background: transparent;
   color: var(--white);
   border-color: rgba(255,255,255,0.45);
 }
-.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
+.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); transform: translateY(-1px); }
 .btn-nav {
   background: transparent;
   color: rgba(255,255,255,0.8);
@@ -78,7 +79,7 @@ address { font-style: normal; }
   padding: 0.5rem 1.4rem;
   font-size: 0.82rem;
 }
-.btn-nav:hover { background: rgba(255,255,255,0.07); color: var(--white); border-color: rgba(255,255,255,0.55); }
+.btn-nav:hover { background: rgba(255,255,255,0.07); color: var(--white); border-color: rgba(255,255,255,0.55); transform: translateY(-1px); }
 .btn-sm { padding: 0.7rem 1.8rem; font-size: 0.82rem; }
 
 /* ── Section headings ─────────────────────────────────────── */
@@ -443,11 +444,12 @@ nav { display: flex; align-items: center; }
   letter-spacing: 0.08em;
   padding: 0.6rem 1.5rem;
   border: 1px solid var(--accent-primary);
-  transition: background var(--ease), color var(--ease);
+  transition: background var(--ease), color var(--ease), transform 0.25s ease;
 }
 .btn-reserve-sm:hover {
-  background: var(--accent-primary);
-  color: var(--white);
+  background: rgba(155,123,79,0.1);
+  color: var(--accent-primary);
+  transform: translateY(-1px);
 }
 
 .btn-line-sm {
@@ -741,6 +743,21 @@ nav { display: flex; align-items: center; }
   .hero-wa { font-size: 1.3rem; }
   .container { padding: 0 1.2rem; }
   .price-card { padding: 1.8rem 1.4rem; }
+}
+
+/* ── Reveal animations ───────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* ── Loader ───────────────────────────────────────────────── */
