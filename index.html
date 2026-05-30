@@ -25,7 +25,10 @@
       </div>
       <div class="loader-foot">
         <span id="loader-counter" class="loader-counter">0</span>
-        <span id="loader-text" class="loader-text">Forge your memory.</span>
+        <div id="loader-text" class="loader-text">
+          <span class="loader-copy-jp">記憶を、環に。</span>
+          <span class="loader-copy-en">Forge your memory.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -77,8 +80,9 @@
         <span class="hero-kanji">環</span>
         <span class="hero-wa">-wa-</span>
       </h1>
-      <p class="hero-tagline">Forge your memory.</p>
-      <a href="reserve.html" class="btn-hero-reserve">オンライン予約はこちら</a>
+      <p class="hero-copy-jp">記憶を、環に。</p>
+      <p class="hero-tagline">世界のコインやスプーンからつくる、<br>記憶を宿すリング体験。</p>
+      <a href="reserve.html" class="btn-hero-reserve">体験を予約する</a>
     </div>
     <div class="hero-foot" aria-hidden="true">
       <span>佐世保市万津町 2-8</span>
@@ -400,6 +404,34 @@
           }
         }, { passive: true });
       }
+    }());
+
+    // Mobile CTA: hidden during Hero, visible after scrolling past 75% of Hero height
+    (function() {
+      var cta  = document.querySelector('.mobile-fixed-cta');
+      var hero = document.getElementById('hero');
+      if (!cta || !hero) return;
+
+      var threshold = 0;
+      var ticking   = false;
+
+      function calcThreshold() {
+        threshold = hero.offsetTop + hero.offsetHeight * 0.75;
+      }
+
+      function updateCta() {
+        cta.classList.toggle('is-visible', window.scrollY > threshold);
+        ticking = false;
+      }
+
+      calcThreshold();
+      window.addEventListener('resize', calcThreshold, { passive: true });
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(updateCta);
+          ticking = true;
+        }
+      }, { passive: true });
     }());
 
     // FAQ accordion
