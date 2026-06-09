@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コインリング オーダー | 環-wa-</title>
+  <meta name="description" content="環-wa- のオンラインショップ。世界各国のコインから手作りしたリングをサイズオーダーで購入できます。¥4,000（税込）。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Shop Hero ──────────────────────────────────────────── */
+    .shop-hero {
+      background: var(--surface-dark);
+      color: var(--white);
+      padding: 9rem 0 4rem;
+      text-align: center;
+    }
+    .shop-hero .section-label { color: rgba(196,147,63,0.8); }
+    .shop-hero h1 {
+      font-family: var(--heading);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      margin-top: 0.8rem;
+      color: var(--white);
+    }
+
+    /* ── Shop Section ───────────────────────────────────────── */
+    .shop-section { padding: 5rem 0 7rem; }
+    .shop-intro {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 4rem;
+    }
+    .shop-intro p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 2.1;
+    }
+
+    /* ── Product Grid ───────────────────────────────────────── */
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+    }
+
+    /* ── Product Card ───────────────────────────────────────── */
+    .product-card {
+      border: 1px solid var(--border-soft);
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+    .product-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .product-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .product-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .product-img-wrap + .product-img-wrap { border-left: 1px solid var(--border-soft); }
+    .img-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.38);
+      color: rgba(255,255,255,0.7);
+      font-family: var(--en);
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-align: center;
+      padding: 0.28rem 0;
+    }
+    .product-body {
+      padding: 1.4rem 1.4rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .product-cat {
+      font-family: var(--en);
+      font-size: 0.62rem;
+      letter-spacing: 0.32em;
+      color: var(--accent-primary);
+      margin-bottom: 0.5rem;
+    }
+    .product-name {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      margin-bottom: 0.65rem;
+      line-height: 1.65;
+    }
+    .product-stock {
+      display: flex;
+      align-items: center;
+      gap: 0.38rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 0.9rem;
+    }
+    .stock-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #5aa86a;
+      flex-shrink: 0;
+    }
+    .product-price {
+      font-family: var(--en);
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--text-primary);
+      margin-top: auto;
+      margin-bottom: 1.1rem;
+    }
+    .product-price small {
+      font-family: var(--jp);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    .btn-order {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      width: 100%;
+      padding: 0.72rem 1.5rem;
+      background: transparent;
+      color: var(--accent-primary);
+      border: 1px solid var(--accent-primary);
+      font-family: var(--jp);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-order:hover { background: rgba(155,123,79,0.1); }
+
+    /* ── Modal ──────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.52);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      background: var(--white);
+      max-width: 480px;
+      width: 100%;
+      padding: 2.8rem 2.4rem 2.4rem;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(10px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.is-open .modal-box { transform: translateY(0); }
+    .modal-close {
+      position: absolute;
+      top: 1.1rem; right: 1.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-family: var(--en);
+      font-size: 1.25rem;
+      line-height: 1;
+      padding: 0.2rem 0.4rem;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text-primary); }
+    .modal-eyebrow {
+      font-family: var(--en);
+      font-size: 0.62rem;
+      letter-spacing: 0.32em;
+      color: var(--accent-primary);
+      margin-bottom: 0.55rem;
+    }
+    .modal-coin-name {
+      font-family: var(--heading);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+      padding-right: 2rem;
+    }
+    .modal-price {
+      font-family: var(--en);
+      font-size: 1.75rem;
+      font-weight: 300;
+      color: var(--text-primary);
+      margin-bottom: 1.8rem;
+    }
+    .modal-price small {
+      font-family: var(--jp);
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+    }
+    .modal-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border-soft);
+      margin-bottom: 1.5rem;
+    }
+    .modal-size-label {
+      font-family: var(--en);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--text-secondary);
+      margin-bottom: 0.85rem;
+      text-transform: uppercase;
+    }
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.45rem;
+      margin-bottom: 2rem;
+    }
+    .size-btn {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-soft);
+      background: none;
+      font-family: var(--en);
+      font-size: 0.82rem;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .size-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    .size-btn.is-selected {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: var(--white);
+    }
+    .btn-checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 1rem 2rem;
+      font-family: var(--jp);
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-checkout--active {
+      background: var(--accent-primary);
+      color: var(--white);
+    }
+    .btn-checkout--active:hover { background: var(--accent-dark); }
+    .btn-checkout--disabled {
+      background: var(--border-soft);
+      color: var(--text-secondary);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ── Notes Section ──────────────────────────────────────── */
+    .shop-notes-section {
+      background: var(--bg-secondary);
+      padding: 5rem 0 6rem;
+    }
+    .shop-notes-body {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .note-item {
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .note-item:first-child { padding-top: 0; }
+    .note-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .note-item h3 {
+      font-family: var(--heading);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .note-item h3::before {
+      content: '';
+      display: inline-block;
+      width: 3px; height: 1.1em;
+      background: var(--accent-primary);
+      flex-shrink: 0;
+    }
+    .note-item p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 2.1;
+      margin-bottom: 0.5rem;
+    }
+    .note-item p:last-child { margin-bottom: 0; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--accent-primary);
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      margin-top: 3rem;
+      transition: gap 0.2s ease;
+    }
+    .back-btn:hover { gap: 0.8rem; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .shop-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 580px) {
+      .shop-grid { grid-template-columns: 1fr; }
+      .size-grid  { grid-template-columns: repeat(5, 1fr); }
+      .modal-box  { padding: 2rem 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="header" class="scrolled">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">環<span>-wa-</span></a>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#about">リングについて</a></li>
+          <li><a href="index.html#flow">体験の流れ</a></li>
+          <li><a href="index.html#pricing">料金</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="shop.html" aria-current="page">ショップ</a></li>
+          <li>
+            <a href="reserve.html" class="btn btn-nav">予約する</a>
+          </li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="shop-hero">
+    <div class="container">
+      <span class="section-label">ONLINE SHOP</span>
+      <h1>コインリング オーダー</h1>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="shop-section">
+    <div class="container">
+      <div class="shop-intro">
+        <p>世界各国から集めたコインを、指輪に仕上げた完成品をお届けします。<br>ご希望のサイズをお選びいただき、そのままオンラインでご注文いただけます。</p>
+      </div>
+      <div class="shop-grid" id="shopGrid"></div>
+    </div>
+  </section>
+
+  <!-- ORDER MODAL -->
+  <div id="shopModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalCoinName">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="閉じる">&#215;</button>
+      <p class="modal-eyebrow">COIN RING ORDER</p>
+      <h2 class="modal-coin-name" id="modalCoinName"></h2>
+      <p class="modal-price">¥4,000<small>（税込）</small></p>
+      <div class="modal-divider"></div>
+      <p class="modal-size-label">SIZE / 号数</p>
+      <div class="size-grid" id="sizeGrid"></div>
+      <a id="checkoutBtn" class="btn-checkout btn-checkout--disabled" href="#" aria-disabled="true">
+        号数を選択してください
+      </a>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <section class="shop-notes-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">NOTES</span>
+        <h2>ご注文の前に</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="shop-notes-body">
+        <div class="note-item">
+          <h3>仕上がりについて</h3>
+          <p>コインリングは一点一点手作業で仕上げています。使用するコインの個体差により、リングの幅・模様の出方・質感に多少の差が生じる場合がございます。あらかじめご了承ください。</p>
+          <p>サイズは号数を基準に製作いたしますが、コインの素材・厚みによっては若干の誤差が生じることがあります。</p>
+        </div>
+        <div class="note-item">
+          <h3>発送について</h3>
+          <p>ご注文から 7〜14日程度でのお届けを予定しております。混雑状況により前後する場合がございます。発送完了後にメールにてお知らせいたします。</p>
+        </div>
+        <div class="note-item">
+          <h3>返品・キャンセルについて</h3>
+          <p>オーダーメイド品の性質上、お客様のご都合による返品・交換・キャンセルはお受けできません。商品の不良・配送事故の場合は公式LINEよりご連絡ください。</p>
+        </div>
+        <div class="note-item">
+          <h3>金属アレルギーについて</h3>
+          <p>使用するコインには銅・真鍮・ニッケルなどの金属が含まれています。金属アレルギーをお持ちの方はご購入前に素材をご確認のうえご注文ください。</p>
+        </div>
+      </div>
+      <a href="index.html" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        トップページへ戻る
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <p class="footer-logo">環<span>-wa-</span></p>
+          <address>
+            <p>〒857-0877<br>長崎県佐世保市万津町２−８</p>
+            <p>営業時間：12:00 〜 20:00（最終予約 19:00）</p>
+            <p>完全予約制</p>
+          </address>
+          <div class="footer-sns">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="sns-btn" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://line.me/R/ti/p/@wa_sasebo" target="_blank" rel="noopener" class="sns-btn" aria-label="LINE">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-map">
+          <iframe
+            src="https://maps.google.com/maps?q=長崎県佐世保市万津町2-8&hl=ja&z=17&output=embed"
+            allowfullscreen
+            loading="lazy"
+            title="環-wa- アクセスマップ"
+          ></iframe>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 環-wa- All Rights Reserved.</p>
+        <a href="caution.html" class="footer-link">注意事項</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Header scroll ─────────────────────────────────────────
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Hamburger menu ────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ── Product data ──────────────────────────────────────────
+    const coins = [
+      { id: 1, name: 'アメリカ 25セント記念', stock: 100 },
+      { id: 2, name: 'フランス 10フラン',    stock: 70  },
+      { id: 3, name: 'メキシコ 1ペソ',       stock: 150 },
+      { id: 4, name: 'オランダ 1ギルダー',   stock: 107 },
+      { id: 5, name: 'フィリピン 1ペソ',     stock: 80  },
+      { id: 6, name: '香港 1ドル エリザベス', stock: 35  },
+      { id: 7, name: '香港 20セント',        stock: 100 },
+      { id: 8, name: 'ベルギー 5フラン',     stock: 75  },
+    ];
+
+    const PLACEHOLDER = 'https://placehold.co/400x400/f5f0e8/c4933f?text=COIN';
+
+    // ── Render product cards ──────────────────────────────────
+    const grid = document.getElementById('shopGrid');
+    coins.forEach(coin => {
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <div class="product-imgs">
+          <div class="product-img-wrap">
+            <img src="${PLACEHOLDER}" alt="${coin.name} コイン" loading="lazy" width="400" height="400">
+            <span class="img-label">COIN</span>
+          </div>
+          <div class="product-img-wrap">
+            <img src="${PLACEHOLDER}" alt="${coin.name} リング仕上がり例" loading="lazy" width="400" height="400">
+            <span class="img-label">RING</span>
+          </div>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">COIN RING</span>
+          <h3 class="product-name">${coin.name}</h3>
+          <p class="product-stock">
+            <span class="stock-dot" aria-hidden="true"></span>
+            在庫 ${coin.stock.toLocaleString()}
+          </p>
+          <p class="product-price">¥4,000<small>（税込）</small></p>
+          <button class="btn-order" data-id="${coin.id}" aria-label="${coin.name} をオーダーする">
+            オーダーする
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // ── Size buttons ──────────────────────────────────────────
+    const sizeGrid = document.getElementById('sizeGrid');
+    for (let s = 8; s <= 25; s++) {
+      const btn = document.createElement('button');
+      btn.className = 'size-btn';
+      btn.dataset.size = s;
+      btn.textContent = s;
+      btn.setAttribute('aria-label', `${s}号`);
+      btn.addEventListener('click', () => selectSize(s));
+      sizeGrid.appendChild(btn);
+    }
+
+    // ── Modal state ───────────────────────────────────────────
+    const modal       = document.getElementById('shopModal');
+    const coinNameEl  = document.getElementById('modalCoinName');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const STRIPE_URL  = 'https://buy.stripe.com/14A6oG7jq54gedp0dVfbq02';
+    let selectedSize  = null;
+
+    function openModal(coinId) {
+      const coin = coins.find(c => c.id === coinId);
+      coinNameEl.textContent = coin.name;
+      selectedSize = null;
+      sizeGrid.querySelectorAll('.size-btn').forEach(b => b.classList.remove('is-selected'));
+      setCheckoutState(false);
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('modalClose').focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function selectSize(size) {
+      selectedSize = size;
+      sizeGrid.querySelectorAll('.size-btn').forEach(b => {
+        const isSelected = Number(b.dataset.size) === size;
+        b.classList.toggle('is-selected', isSelected);
+        b.setAttribute('aria-pressed', String(isSelected));
+      });
+      setCheckoutState(true);
+    }
+
+    function setCheckoutState(active) {
+      if (active) {
+        checkoutBtn.textContent = `${selectedSize}号でオーダーする`;
+        checkoutBtn.className = 'btn-checkout btn-checkout--active';
+        checkoutBtn.href = STRIPE_URL;
+        checkoutBtn.removeAttribute('aria-disabled');
+      } else {
+        checkoutBtn.textContent = '号数を選択してください';
+        checkoutBtn.className = 'btn-checkout btn-checkout--disabled';
+        checkoutBtn.href = '#';
+        checkoutBtn.setAttribute('aria-disabled', 'true');
+      }
+    }
+
+    // Prevent disabled link navigation
+    checkoutBtn.addEventListener('click', e => {
+      if (checkoutBtn.getAttribute('aria-disabled') === 'true') e.preventDefault();
+    });
+
+    // Delegate order button clicks
+    grid.addEventListener('click', e => {
+      const btn = e.target.closest('.btn-order');
+      if (btn) openModal(Number(btn.dataset.id));
+    });
+
+    // Close triggers
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+  </script>
+</body>
+</html>
