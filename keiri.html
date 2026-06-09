@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+  経費転記ツール | 環 -wa- / bar Hz
+  ============================================================
+
+  【GAS (Google Apps Script) セットアップ手順】
+
+  1. 転記先のGoogleスプレッドシートを開く
+  2. 「拡張機能」→「Apps Script」を開く
+  3. 以下のコードをエディタに貼り付けて保存 (Ctrl+S / Cmd+S):
+
+  ─────────────────────────────────────────
+  function doPost(e) {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['日付', '店名・支払先', '金額', '勘定科目', '摘要', '登録日時']);
+    }
+    const data = JSON.parse(e.postData.contents);
+    sheet.appendRow([data.date, data.vendor, data.amount, data.account, data.memo, data.registeredAt]);
+    return ContentService.createTextOutput(JSON.stringify({ status: 'ok' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  ─────────────────────────────────────────
+
+  4. 「デプロイ」→「新しいデプロイ」をクリック
+  5. 種類: ウェブアプリ / 実行ユーザー: 自分 / アクセス: 全員
+  6. 「デプロイ」→ 生成されたURLをコピーしてこのツールの設定に貼り付け
+
+  ============================================================
+
+  【GitHub Pages デプロイ手順】
+
+  git add keiri.html
+  git commit -m "add: 経費転記ツール"
+  git push
+
+  アクセスURL: https://[username].github.io/[repo]/keiri.html
+  iPhoneのSafariで開き「ホーム画面に追加」でアプリとして使用可能
+
+  ============================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="経費転記" />
+  <title>経費転記 | 環 -wa- / bar Hz</title>
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --surface: #ffffff;
+      --surface2: #f0f0f0;
+      --text: #1a1a1a;
+      --text2: #777777;
+      --border: #e2e2e2;
+      --primary: #222222;
+      --primary-fg: #ffffff;
+      --accent: #3d7a52;
+      --accent-light: rgba(61, 122, 82, 0.12);
+      --error: #c0392b;
+      --error-light: rgba(192, 57, 43, 0.1);
+      --success: #27ae60;
+      --success-light: rgba(39, 174, 96, 0.12);
+      --radius: 12px;
+      --shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #101010;
+        --surface: #1a1a1a;
+        --surface2: #242424;
+        --text: #e4e4e4;
+        --text2: #888888;
+        --border: #2e2e2e;
+        --primary: #e4e4e4;
+        --primary-fg: #1a1a1a;
+        --accent: #4e9966;
+        --accent-light: rgba(78, 153, 102, 0.15);
+        --error: #e74c3c;
+        --error-light: rgba(231, 76, 60, 0.12);
+        --success: #2ecc71;
+        --success-light: rgba(46, 204, 113, 0.12);
+        --shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans',
+        'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ─────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .header-brand {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 1px;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-reset-header {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text2);
+      font-size: 12px;
+      font-family: inherit;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-reset-header:hover {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    /* ── Main ────────────────────────────────── */
+    main {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 14px 14px calc(env(safe-area-inset-bottom, 0px) + 24px);
+    }
+
+    /* ── Card ────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    /* ── Settings ────────────────────────────── */
+    .settings-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .settings-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 500;
+    }
+
+    .settings-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--error);
+      flex-shrink: 0;
+    }
+
+    .settings-indicator.ok {
+      background: var(--success);
+    }
+
+    .settings-chevron {
+      font-size: 11px;
+      color: var(--text2);
+      transition: transform 0.2s;
+    }
+
+    .settings-chevron.open {
+      transform: rotate(180deg);
+    }
+
+    .settings-body {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .settings-body.open {
+      display: block;
+    }
+
+    /* ── Form Fields ─────────────────────────── */
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--text2);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: var(--accent);
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="password"]:focus {
+      border-color: var(--accent);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 36px;
+    }
+
+    .field-note {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+
+    .field-note.warn {
+      color: #b8860b;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .field-note.warn {
+        color: #f0ad4e;
+      }
+    }
+
+    /* ── Upload Area ─────────────────────────── */
+    .upload-area {
+      position: relative;
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 36px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .upload-area:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .upload-file-input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 38px;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    .upload-label {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .upload-label strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── Preview ─────────────────────────────── */
+    .preview-wrap {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .preview-wrap.visible {
+      display: block;
+    }
+
+    .preview-img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: var(--surface2);
+      display: block;
+    }
+
+    .preview-filename {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Buttons ─────────────────────────────── */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:active:not(:disabled) {
+      transform: scale(0.98);
+      opacity: 0.85;
+    }
+
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-fg);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-ghost {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-sm {
+      padding: 9px 16px;
+      font-size: 13px;
+      width: auto;
+      border-radius: 8px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn-row .btn {
+      flex: 1;
+    }
+
+    /* ── Status ──────────────────────────────── */
+    .status {
+      margin-top: 10px;
+      padding: 10px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      display: none;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .status.visible {
+      display: flex;
+    }
+
+    .status.loading {
+      background: var(--surface2);
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+
+    .status.success {
+      background: var(--success-light);
+      color: var(--success);
+      border: 1px solid rgba(39, 174, 96, 0.25);
+    }
+
+    .status.error {
+      background: var(--error-light);
+      color: var(--error);
+      border: 1px solid rgba(192, 57, 43, 0.2);
+    }
+
+    /* ── Spinner ─────────────────────────────── */
+    .spinner {
+      width: 13px;
+      height: 13px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.55s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── History ─────────────────────────────── */
+    .history-list {
+      list-style: none;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .history-item:first-child {
+      padding-top: 0;
+    }
+
+    .history-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .history-vendor {
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .history-meta {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    .history-amount {
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+      color: var(--accent);
+    }
+
+    .history-empty {
+      font-size: 13px;
+      color: var(--text2);
+      text-align: center;
+      padding: 12px 0;
+    }
+
+    /* ── Hidden ──────────────────────────────── */
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-title">経費転記</div>
+      <div class="header-brand">環 -wa- / bar Hz</div>
+    </div>
+    <button class="btn-reset-header" onclick="resetAll()">リセット</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── 設定カード ──────────────────────────── -->
+  <div class="card">
+    <div class="settings-header" onclick="toggleSettings()">
+      <div class="settings-header-left">
+        <span class="settings-indicator" id="settingsIndicator"></span>
+        <span>設定</span>
+      </div>
+      <span class="settings-chevron" id="settingsChevron">▾</span>
+    </div>
+    <div class="settings-body" id="settingsBody">
+      <div class="form-group">
+        <label>Anthropic APIキー</label>
+        <input type="password" id="inputApiKey" placeholder="sk-ant-api03-..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" />
+        <div class="field-note warn">⚠ APIキーはブラウザのlocalStorageに保存されます。共有端末では使用しないでください。</div>
+      </div>
+      <div class="form-group">
+        <label>Google スプレッドシート GAS URL</label>
+        <input type="text" id="inputGasUrl" placeholder="https://script.google.com/macros/s/..." autocorrect="off" autocapitalize="none" spellcheck="false" />
+        <div class="field-note">GASのデプロイURLを貼り付けてください（設定手順はHTMLソースのコメントを参照）</div>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="saveSettings()">保存する</button>
+      <div class="status" id="statusSettings"></div>
+    </div>
+  </div>
+
+  <!-- ── アップロードカード ───────────────────── -->
+  <div class="card" id="sectionUpload">
+    <div class="card-title">領収書アップロード</div>
+    <div class="upload-area" id="uploadArea">
+      <input
+        class="upload-file-input"
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        capture="environment"
+        onchange="handleFileSelect(event)"
+      />
+      <div class="upload-icon">📷</div>
+      <div class="upload-label">
+        <strong>タップして撮影</strong> または 画像を選択
+      </div>
+    </div>
+
+    <div class="preview-wrap" id="previewWrap">
+      <img class="preview-img" id="previewImg" src="" alt="領収書プレビュー" />
+      <div class="preview-filename" id="previewFilename"></div>
+    </div>
+
+    <div style="margin-top: 12px;">
+      <button class="btn btn-primary" id="btnRead" onclick="readWithAI()" disabled>
+        AIで読み取る
+      </button>
+    </div>
+    <div class="status" id="statusRead"></div>
+  </div>
+
+  <!-- ── 確認フォームカード ──────────────────── -->
+  <div class="card hidden" id="sectionForm">
+    <div class="card-title">内容確認・修正</div>
+
+    <div class="form-group">
+      <label for="fDate">日付</label>
+      <input type="text" id="fDate" placeholder="YYYY/MM/DD" />
+    </div>
+
+    <div class="form-group">
+      <label for="fAmount">金額（円・税込）</label>
+      <input type="number" id="fAmount" placeholder="0" min="0" step="1" inputmode="numeric" />
+    </div>
+
+    <div class="form-group">
+      <label for="fVendor">店名・支払先</label>
+      <input type="text" id="fVendor" placeholder="店名を入力" />
+    </div>
+
+    <div class="form-group">
+      <label for="fAccount">勘定科目</label>
+      <select id="fAccount">
+        <option value="消耗品費">消耗品費</option>
+        <option value="交際費">交際費</option>
+        <option value="会議費">会議費</option>
+        <option value="旅費交通費">旅費交通費</option>
+        <option value="通信費">通信費</option>
+        <option value="広告宣伝費">広告宣伝費</option>
+        <option value="水道光熱費">水道光熱費</option>
+        <option value="地代家賃">地代家賃</option>
+        <option value="仕入高">仕入高</option>
+        <option value="外注費">外注費</option>
+        <option value="雑費">雑費</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="fMemo">摘要（任意）</label>
+      <input type="text" id="fMemo" placeholder="補足メモなど" />
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="resetAll()">← 撮り直す</button>
+      <button class="btn btn-accent" id="btnSubmit" onclick="submitToSheet()">転記する →</button>
+    </div>
+    <div class="status" id="statusSubmit"></div>
+  </div>
+
+  <!-- ── 履歴カード ──────────────────────────── -->
+  <div class="card" id="sectionHistory">
+    <div class="card-title">今セッションの転記履歴</div>
+    <ul class="history-list" id="historyList">
+      <li class="history-empty">まだ転記はありません</li>
+    </ul>
+  </div>
+
+</main>
+
+<script>
+  // ─── 状態 ──────────────────────────────────────────────────────
+  const appState = {
+    imageBase64: null,
+    imageMediaType: null,
+    history: []
+  };
+
+  // ─── 初期化 ────────────────────────────────────────────────────
+  (function init() {
+    const savedApiKey = localStorage.getItem('keiri_apiKey') || '';
+    const savedGasUrl = localStorage.getItem('keiri_gasUrl') || '';
+    document.getElementById('inputApiKey').value = savedApiKey;
+    document.getElementById('inputGasUrl').value = savedGasUrl;
+    updateSettingsIndicator();
+    if (!savedApiKey || !savedGasUrl) {
+      openSettings();
+    }
+  })();
+
+  // ─── 設定 ──────────────────────────────────────────────────────
+  function toggleSettings() {
+    const body = document.getElementById('settingsBody');
+    if (body.classList.contains('open')) {
+      closeSettings();
+    } else {
+      openSettings();
+    }
+  }
+
+  function openSettings() {
+    document.getElementById('settingsBody').classList.add('open');
+    document.getElementById('settingsChevron').classList.add('open');
+  }
+
+  function closeSettings() {
+    document.getElementById('settingsBody').classList.remove('open');
+    document.getElementById('settingsChevron').classList.remove('open');
+  }
+
+  function updateSettingsIndicator() {
+    const apiKey = localStorage.getItem('keiri_apiKey') || '';
+    const gasUrl = localStorage.getItem('keiri_gasUrl') || '';
+    const indicator = document.getElementById('settingsIndicator');
+    if (apiKey && gasUrl) {
+      indicator.classList.add('ok');
+    } else {
+      indicator.classList.remove('ok');
+    }
+  }
+
+  function saveSettings() {
+    const apiKey = document.getElementById('inputApiKey').value.trim();
+    const gasUrl = document.getElementById('inputGasUrl').value.trim();
+    localStorage.setItem('keiri_apiKey', apiKey);
+    localStorage.setItem('keiri_gasUrl', gasUrl);
+    updateSettingsIndicator();
+    showStatus('statusSettings', 'success', '✓ 保存しました');
+    setTimeout(closeSettings, 1000);
+  }
+
+  // ─── ファイル選択 ───────────────────────────────────────────────
+  function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const commaIdx = dataUrl.indexOf(',');
+      const header = dataUrl.substring(0, commaIdx);
+      const base64 = dataUrl.substring(commaIdx + 1);
+      const mediaTypeMatch = header.match(/data:([^;]+)/);
+      const mediaType = mediaTypeMatch ? mediaTypeMatch[1] : 'image/jpeg';
+
+      appState.imageBase64 = base64;
+      appState.imageMediaType = mediaType;
+
+      document.getElementById('previewImg').src = dataUrl;
+      document.getElementById('previewFilename').textContent = file.name;
+      document.getElementById('previewWrap').classList.add('visible');
+      document.getElementById('btnRead').disabled = false;
+      hideStatus('statusRead');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ─── AI読み取り ─────────────────────────────────────────────────
+  async function readWithAI() {
+    const apiKey = localStorage.getItem('keiri_apiKey') || '';
+    if (!apiKey) {
+      showStatus('statusRead', 'error', 'APIキーが設定されていません。設定を開いて入力してください。');
+      openSettings();
+      return;
+    }
+    if (!appState.imageBase64) {
+      showStatus('statusRead', 'error', '画像を選択してください。');
+      return;
+    }
+
+    const btn = document.getElementById('btnRead');
+    btn.disabled = true;
+    showStatus('statusRead', 'loading', '<span class="spinner"></span> AIが読み取り中...');
+
+    const prompt =
+      'この領収書を読み取り、以下のJSONのみ返してください。前置き不要。\n' +
+      '{"date":"YYYY/MM/DD","amount":数値,"vendor":"店名","account":"消耗品費|交際費|会議費|旅費交通費|通信費|広告宣伝費|水道光熱費|地代家賃|仕入高|外注費|雑費のいずれか","memo":"補足or空文字"}';
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+          'anthropic-dangerous-request-allow-browsers': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 512,
+          messages: [{
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: {
+                  type: 'base64',
+                  media_type: appState.imageMediaType,
+                  data: appState.imageBase64
+                }
+              },
+              {
+                type: 'text',
+                text: prompt
+              }
+            ]
+          }]
+        })
+      });
+
+      if (!res.ok) {
+        let errMsg = 'HTTPエラー ' + res.status;
+        try {
+          const errBody = await res.json();
+          if (errBody && errBody.error && errBody.error.message) {
+            errMsg = errBody.error.message;
+          }
+        } catch (_) {}
+        throw new Error(errMsg);
+      }
+
+      const data = await res.json();
+      const rawText = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text.trim() : '';
+
+      // コードフェンスを除去してJSONを抽出
+      let jsonStr = rawText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+      const jsonMatch = jsonStr.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error('JSONを抽出できませんでした');
+
+      const extracted = JSON.parse(jsonMatch[0]);
+      populateForm(extracted);
+
+      showStatus('statusRead', 'success', '✓ 読み取り完了。内容を確認・修正してください。');
+      showSection('sectionForm');
+      smoothScrollTo('sectionForm');
+
+    } catch (err) {
+      showStatus('statusRead', 'error', 'エラー: ' + esc(err.message) + '　— 手動で入力してください。');
+      // エラー時もフォームを表示して手動入力を可能にする
+      showSection('sectionForm');
+      smoothScrollTo('sectionForm');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // ─── フォーム入力 ───────────────────────────────────────────────
+  function populateForm(data) {
+    const accounts = ['消耗品費','交際費','会議費','旅費交通費','通信費','広告宣伝費','水道光熱費','地代家賃','仕入高','外注費','雑費'];
+    document.getElementById('fDate').value = data.date || '';
+    document.getElementById('fAmount').value = (data.amount != null) ? String(data.amount) : '';
+    document.getElementById('fVendor').value = data.vendor || '';
+    document.getElementById('fMemo').value = data.memo || '';
+    if (data.account && accounts.includes(data.account)) {
+      document.getElementById('fAccount').value = data.account;
+    }
+  }
+
+  // ─── 転記 ───────────────────────────────────────────────────────
+  async function submitToSheet() {
+    const gasUrl = localStorage.getItem('keiri_gasUrl') || '';
+    if (!gasUrl) {
+      showStatus('statusSubmit', 'error', 'GAS URLが設定されていません。設定を開いて入力してください。');
+      openSettings();
+      return;
+    }
+
+    const date   = document.getElementById('fDate').value.trim();
+    const amount = document.getElementById('fAmount').value.trim();
+    const vendor = document.getElementById('fVendor').value.trim();
+    const account = document.getElementById('fAccount').value;
+    const memo   = document.getElementById('fMemo').value.trim();
+
+    if (!date || !amount || !vendor) {
+      showStatus('statusSubmit', 'error', '日付・金額・店名は必須です。');
+      return;
+    }
+
+    const now = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const registeredAt =
+      now.getFullYear() + '/' + pad(now.getMonth() + 1) + '/' + pad(now.getDate()) +
+      ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
+
+    const payload = {
+      date,
+      amount: Number(amount),
+      vendor,
+      account,
+      memo,
+      registeredAt
+    };
+
+    const btn = document.getElementById('btnSubmit');
+    btn.disabled = true;
+    showStatus('statusSubmit', 'loading', '<span class="spinner"></span> スプレッドシートに転記中...');
+
+    try {
+      // GASのCORS制約のためno-corsで送信（レスポンスはopaqueになる）
+      await fetch(gasUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      });
+
+      addHistory({ date, amount: Number(amount), vendor, account });
+      showStatus('statusSubmit', 'success', '✓ 転記しました！');
+
+      setTimeout(() => {
+        resetAll();
+      }, 2200);
+
+    } catch (err) {
+      showStatus('statusSubmit', 'error', '転記に失敗しました: ' + esc(err.message));
+      btn.disabled = false;
+    }
+  }
+
+  // ─── 履歴 ───────────────────────────────────────────────────────
+  function addHistory(item) {
+    appState.history.unshift(item);
+    renderHistory();
+  }
+
+  function renderHistory() {
+    const list = document.getElementById('historyList');
+    if (appState.history.length === 0) {
+      list.innerHTML = '<li class="history-empty">まだ転記はありません</li>';
+      return;
+    }
+    list.innerHTML = appState.history.map(function(item) {
+      return '<li class="history-item">' +
+        '<div class="history-info">' +
+          '<div class="history-vendor">' + esc(item.vendor) + '</div>' +
+          '<div class="history-meta">' + esc(item.date) + '&nbsp;·&nbsp;' + esc(item.account) + '</div>' +
+        '</div>' +
+        '<div class="history-amount">¥' + Number(item.amount).toLocaleString() + '</div>' +
+      '</li>';
+    }).join('');
+  }
+
+  // ─── リセット ───────────────────────────────────────────────────
+  function resetAll() {
+    appState.imageBase64 = null;
+    appState.imageMediaType = null;
+
+    document.getElementById('fileInput').value = '';
+    document.getElementById('previewWrap').classList.remove('visible');
+    document.getElementById('previewImg').src = '';
+    document.getElementById('previewFilename').textContent = '';
+    document.getElementById('btnRead').disabled = true;
+
+    document.getElementById('sectionForm').classList.add('hidden');
+
+    document.getElementById('fDate').value = '';
+    document.getElementById('fAmount').value = '';
+    document.getElementById('fVendor').value = '';
+    document.getElementById('fAccount').value = '消耗品費';
+    document.getElementById('fMemo').value = '';
+
+    hideStatus('statusRead');
+    hideStatus('statusSubmit');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─── ユーティリティ ────────────────────────────────────────────
+  function showSection(id) {
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  function smoothScrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      setTimeout(function() {
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
+    }
+  }
+
+  function showStatus(id, type, html) {
+    const el = document.getElementById(id);
+    el.className = 'status ' + type + ' visible';
+    el.innerHTML = html;
+  }
+
+  function hideStatus(id) {
+    const el = document.getElementById(id);
+    el.className = 'status';
+    el.innerHTML = '';
+  }
+
+  function esc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+</script>
+</body>
+</html>
