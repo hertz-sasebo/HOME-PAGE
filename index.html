@@ -13,7 +13,7 @@
 <body>
 
   <!-- LOADER -->
-  <div id="loader" role="status" aria-label="読み込み中">
+  <div id="loader" role="status" data-i18n-aria="loader.ariaLabel" aria-label="読み込み中">
     <div class="loader-inner">
       <div class="loader-ring-wrap">
         <svg class="loader-ring" viewBox="0 0 100 100" aria-hidden="true">
@@ -26,7 +26,7 @@
       <div class="loader-foot">
         <span id="loader-counter" class="loader-counter">0</span>
         <div id="loader-text" class="loader-text">
-          <span class="loader-copy-jp">記憶を、環に。</span>
+          <span class="loader-copy-jp" data-i18n="loader.copyJp">記憶を、環に。</span>
           <span class="loader-copy-en">Forge your memory.</span>
         </div>
       </div>
@@ -39,18 +39,34 @@
       <a href="#" class="logo">環<span>-wa-</span></a>
       <nav>
         <ul class="nav-links" id="navLinks">
-          <li><a href="#about">リングについて</a></li>
-          <li><a href="#flow">体験の流れ</a></li>
-          <li><a href="#pricing">料金</a></li>
+          <li><a href="#about" data-i18n="nav.about">リングについて</a></li>
+          <li><a href="#flow" data-i18n="nav.flow">体験の流れ</a></li>
+          <li><a href="#pricing" data-i18n="nav.pricing">料金</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="shop.html">ショップ</a></li>
+          <li><a href="shop.html" data-i18n="nav.shop">ショップ</a></li>
           <li>
-            <a href="reserve.html" class="btn btn-nav">
-              予約する
-            </a>
+            <a href="reserve.html" class="btn btn-nav" data-i18n="nav.reserve">予約する</a>
+          </li>
+          <!-- Mobile lang switcher — shown only in hamburger overlay -->
+          <li class="nav-lang-item">
+            <div class="lang-switcher lang-switcher--mobile" aria-label="言語切替">
+              <button class="lang-btn" data-lang="ja">JA</button>
+              <button class="lang-btn" data-lang="en">EN</button>
+              <button class="lang-btn" data-lang="zh">中</button>
+              <button class="lang-btn" data-lang="ko">한</button>
+            </div>
           </li>
         </ul>
-        <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <!-- Desktop lang switcher -->
+        <div class="lang-switcher" aria-label="言語切替">
+          <button class="lang-btn" data-lang="ja">JA</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="zh">中</button>
+          <button class="lang-btn" data-lang="ko">한</button>
+        </div>
+        <button class="hamburger" id="hamburger"
+                data-i18n-aria="burger.open"
+                aria-label="メニューを開く" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </nav>
@@ -59,7 +75,6 @@
 
   <!-- HERO -->
   <section id="hero">
-    <!-- VIDEO BACKGROUND -->
     <div class="hero-bg" id="heroBg">
       <div class="hero-vid-wrap v1 active">
         <video autoplay muted playsinline loop preload="auto"
@@ -76,19 +91,21 @@
     </div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="hero-content" id="heroContent">
-      <p class="hero-eyebrow">Handmade Ring Workshop</p>
+      <p class="hero-eyebrow" data-i18n="hero.eyebrow">Handmade Ring Workshop</p>
       <h1 class="hero-mark">
         <span class="hero-kanji">環</span>
         <span class="hero-wa">-wa-</span>
       </h1>
-      <p class="hero-copy-jp">記憶を、環に。</p>
-      <p class="hero-tagline">世界のコインやスプーンからつくる、<br>記憶を宿すリング体験。</p>
-      <a href="reserve.html" class="btn-hero-reserve">体験を予約する<span class="btn-arrow" aria-hidden="true">→</span></a>
+      <p class="hero-copy-jp" data-i18n="hero.copy">記憶を、環に。</p>
+      <p class="hero-tagline" data-i18n-html="hero.tagline">世界のコインやスプーンからつくる、<br>記憶を宿すリング体験。</p>
+      <a href="reserve.html" class="btn-hero-reserve">
+        <span data-i18n="hero.reserve">体験を予約する</span><span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
     <div class="hero-foot" aria-hidden="true">
-      <span>佐世保市万津町 2-8</span>
-      <span>完全予約制</span>
-      <span>12:00 — 20:00</span>
+      <span data-i18n="hero.address">佐世保市万津町 2-8</span>
+      <span data-i18n="hero.byReservation">完全予約制</span>
+      <span data-i18n="hero.hours">12:00 — 20:00</span>
     </div>
     <div class="scroll-down" aria-hidden="true">
       <div class="scroll-line"></div>
@@ -101,7 +118,7 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="section-label">ABOUT</span>
-        <h2>リングについて</h2>
+        <h2 data-i18n="about.heading">リングについて</h2>
         <div class="divider"></div>
       </div>
       <div class="about-grid">
@@ -109,17 +126,17 @@
         <div class="about-card reveal">
           <div class="about-img" data-parallax><img src="images/スプーンリング.png" alt="スプーンリング" loading="lazy"></div>
           <span class="about-tag">SPOON RING</span>
-          <h3>スプーンリング</h3>
-          <p>スプーンリングには、100年以上の歴史があります。かつてヨーロッパでは、銀のスプーンは家族が受け継ぐ大切な財産のひとつ。そのスプーンをリングに作り替えて愛する人へ贈る、という婚約の習慣が生まれました。</p>
-          <p>「あなたのために、大切なものを形にして捧げます」という深い想いを込められたスプーンリングは、ふたりの絆を象徴する贈り物として今もなお多くのカップルに愛され続けています。大切な人と並んで、世界にひとつだけの指輪を作りませんか？</p>
+          <h3 data-i18n="about.spoon.title">スプーンリング</h3>
+          <p data-i18n="about.spoon.p1">スプーンリングには、100年以上の歴史があります。かつてヨーロッパでは、銀のスプーンは家族が受け継ぐ大切な財産のひとつ。そのスプーンをリングに作り替えて愛する人へ贈る、という婚約の習慣が生まれました。</p>
+          <p data-i18n="about.spoon.p2">「あなたのために、大切なものを形にして捧げます」という深い想いを込められたスプーンリングは、ふたりの絆を象徴する贈り物として今もなお多くのカップルに愛され続けています。大切な人と並んで、世界にひとつだけの指輪を作りませんか？</p>
         </div>
 
         <div class="about-card reveal">
           <div class="about-img" data-parallax><img src="images/コインリング.png" alt="コインリング" loading="lazy"></div>
           <span class="about-tag">COIN RING</span>
-          <h3>コインリング</h3>
-          <p>アメリカ、ヨーロッパ、アジア……世界中から集めたコインを、あなただけの指輪に。デザインや歴史が刻まれたコインをひとつ選び、自分の手でリングへと生まれ変わらせる工程はまるで小さな冒険です。</p>
-          <p>旅の記念、大切な人へのプレゼント、自分へのご褒美に——あの日あの場所の気持ちを、ずっと指先に宿してください。完成した瞬間の感動とともに、忘れられない思い出が残ります。</p>
+          <h3 data-i18n="about.coin.title">コインリング</h3>
+          <p data-i18n="about.coin.p1">アメリカ、ヨーロッパ、アジア……世界中から集めたコインを、あなただけの指輪に。デザインや歴史が刻まれたコインをひとつ選び、自分の手でリングへと生まれ変わらせる工程はまるで小さな冒険です。</p>
+          <p data-i18n="about.coin.p2">旅の記念、大切な人へのプレゼント、自分へのご褒美に——あの日あの場所の気持ちを、ずっと指先に宿してください。完成した瞬間の感動とともに、忘れられない思い出が残ります。</p>
         </div>
 
       </div>
@@ -131,7 +148,7 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="section-label">FLOW</span>
-        <h2>体験の流れ</h2>
+        <h2 data-i18n="flow.heading">体験の流れ</h2>
         <div class="divider"></div>
       </div>
       <ol class="flow-list">
@@ -139,53 +156,51 @@
         <li class="flow-step reveal">
           <div class="flow-num">01</div>
           <div class="flow-body">
-            <h3>ご予約</h3>
-            <p>下記よりご希望の日時・人数・体験メニューをお選びいただきご予約ください。</p>
-            <a href="reserve.html" class="btn-reserve-sm">
-              ご予約はこちらから
-            </a>
+            <h3 data-i18n="flow.s01.title">ご予約</h3>
+            <p data-i18n="flow.s01.p">下記よりご希望の日時・人数・体験メニューをお選びいただきご予約ください。</p>
+            <a href="reserve.html" class="btn-reserve-sm" data-i18n="flow.s01.btn">ご予約はこちらから</a>
           </div>
         </li>
 
         <li class="flow-step reveal">
           <div class="flow-num">02</div>
           <div class="flow-body">
-            <h3>当日ご来店</h3>
-            <p>事前に<a href="caution.html" class="text-link">注意事項</a>をよくお読みいただき、開始時刻の5分前までにお越しください。お席にご案内し、体験の説明をいたします。</p>
+            <h3 data-i18n="flow.s02.title">当日ご来店</h3>
+            <p data-i18n-html="flow.s02.p">事前に<a href="caution.html" class="text-link">注意事項</a>をよくお読みいただき、開始時刻の5分前までにお越しください。お席にご案内し、体験の説明をいたします。</p>
           </div>
         </li>
 
         <li class="flow-step reveal">
           <div class="flow-num">03</div>
           <div class="flow-body">
-            <h3>コイン・スプーン選び</h3>
-            <span class="flow-time">約 10分</span>
-            <p>世界各国から集めたコインとスプーンの中からお気に入りの一枚をお選びください。どれにしようか迷う時間も、体験のひとつです。</p>
+            <h3 data-i18n="flow.s03.title">コイン・スプーン選び</h3>
+            <span class="flow-time" data-i18n="flow.s03.time">約 10分</span>
+            <p data-i18n="flow.s03.p">世界各国から集めたコインとスプーンの中からお気に入りの一枚をお選びください。どれにしようか迷う時間も、体験のひとつです。</p>
           </div>
         </li>
 
         <li class="flow-step reveal">
           <div class="flow-num">04</div>
           <div class="flow-body">
-            <h3>リング作り</h3>
-            <span class="flow-time">約 30〜50分</span>
-            <p>専門スタッフが丁寧にご指導いたします。叩いて、曲げて、磨いて——少しずつリングの形になっていく過程をどうぞお楽しみください。初めての方でも安心してご体験いただけます。</p>
+            <h3 data-i18n="flow.s04.title">リング作り</h3>
+            <span class="flow-time" data-i18n="flow.s04.time">約 30〜50分</span>
+            <p data-i18n="flow.s04.p">専門スタッフが丁寧にご指導いたします。叩いて、曲げて、磨いて——少しずつリングの形になっていく過程をどうぞお楽しみください。初めての方でも安心してご体験いただけます。</p>
           </div>
         </li>
 
         <li class="flow-step reveal">
           <div class="flow-num">05</div>
           <div class="flow-body">
-            <h3>ペンダントトップ作り</h3>
-            <p>リング作りの余った素材を使って、ペンダントトップも作れます。ネックレスやキーホルダーとして持ち帰れる、もうひとつのお土産に。<br><span class="inline-note">※別途 ¥1,000〜でお楽しみいただけるオプションです。</span></p>
+            <h3 data-i18n="flow.s05.title">ペンダントトップ作り</h3>
+            <p data-i18n-html="flow.s05.p">リング作りの余った素材を使って、ペンダントトップも作れます。ネックレスやキーホルダーとして持ち帰れる、もうひとつのお土産に。<br><span class="inline-note">※別途 ¥1,000〜でお楽しみいただけるオプションです。</span></p>
           </div>
         </li>
 
         <li class="flow-step reveal">
           <div class="flow-num">06</div>
           <div class="flow-body">
-            <h3>ワークショップ終了</h3>
-            <p>完成おめでとうございます。世界にひとつだけの指輪とともに、今日の特別な時間をそっと指にはめてお帰りください。またのお越しを心よりお待ちしております。</p>
+            <h3 data-i18n="flow.s06.title">ワークショップ終了</h3>
+            <p data-i18n="flow.s06.p">完成おめでとうございます。世界にひとつだけの指輪とともに、今日の特別な時間をそっと指にはめてお帰りください。またのお越しを心よりお待ちしております。</p>
           </div>
         </li>
 
@@ -198,43 +213,43 @@
     <div class="container">
       <div class="section-head section-head--light reveal">
         <span class="section-label">PRICE</span>
-        <h2>料金案内</h2>
+        <h2 data-i18n="pricing.heading">料金案内</h2>
         <div class="divider divider--light"></div>
       </div>
       <div class="pricing-grid">
 
         <div class="price-card price-card--main reveal">
-          <span class="price-badge">人気</span>
-          <span class="price-cat">リング手作り体験</span>
+          <span class="price-badge" data-i18n="pricing.badge">人気</span>
+          <span class="price-cat" data-i18n="pricing.ring.cat">リング手作り体験</span>
           <div class="price-val">¥6,500~<small>/名（税込）</small></div>
           <ul class="price-meta">
-            <li>所要時間：40分〜1時間</li>
-            <li>体験人数：1〜4名</li>
-            <li>対象年齢：中学生以上</li>
+            <li data-i18n="pricing.ring.meta1">所要時間：40分〜1時間</li>
+            <li data-i18n="pricing.ring.meta2">体験人数：1〜4名</li>
+            <li data-i18n="pricing.ring.meta3">対象年齢：中学生以上</li>
           </ul>
         </div>
 
         <div class="price-card reveal">
-          <span class="price-cat">オーダーメイドリング</span>
+          <span class="price-cat" data-i18n="pricing.order.cat">オーダーメイドリング</span>
           <div class="price-val">¥5,500~<small>/名（税込）</small></div>
           <ul class="price-meta">
-            <li>ご要望に合わせてデザイン</li>
-            <li>詳細はLINEにてご相談</li>
+            <li data-i18n="pricing.order.meta1">ご要望に合わせてデザイン</li>
+            <li data-i18n="pricing.order.meta2">詳細はLINEにてご相談</li>
           </ul>
         </div>
 
         <div class="price-card reveal">
-          <span class="price-cat">追加オプション</span>
+          <span class="price-cat" data-i18n="pricing.option.cat">追加オプション</span>
           <ul class="price-option-list">
-            <li><span>ペンダントトップ</span><em>¥1,000〜</em></li>
+            <li><span data-i18n="pricing.option.pendant">ペンダントトップ</span><em>¥1,000〜</em></li>
           </ul>
         </div>
 
         <div class="price-card reveal">
-          <span class="price-cat">販売商品</span>
-          <p class="price-item-name">コインリング</p>
+          <span class="price-cat" data-i18n="pricing.sale.cat">販売商品</span>
+          <p class="price-item-name" data-i18n="pricing.sale.name">コインリング</p>
           <div class="price-val">¥4,000~<small>（税込）</small></div>
-          <p class="price-desc">体験が難しい方もお気軽にどうぞ。</p>
+          <p class="price-desc" data-i18n="pricing.sale.desc">体験が難しい方もお気軽にどうぞ。</p>
         </div>
 
       </div>
@@ -246,54 +261,54 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="section-label">FAQ</span>
-        <h2>よくある質問</h2>
+        <h2 data-i18n="faq.heading">よくある質問</h2>
         <div class="divider"></div>
       </div>
       <dl class="faq-list reveal">
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>予約なしで来店できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">当工房は<strong>完全予約制</strong>となっております。公式LINEよりご予約のうえお越しください。当日のご予約もLINEにて承ります（空き状況によります）。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q01">予約なしで来店できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n-html="faq.a01">当工房は<strong>完全予約制</strong>となっております。公式LINEよりご予約のうえお越しください。当日のご予約もLINEにて承ります（空き状況によります）。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>一人でも体験できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">もちろんです。おひとり様から最大4名様まで体験いただけます。おひとりでじっくり楽しまれるお客様も多くいらっしゃいます。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q02">一人でも体験できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n="faq.a02">もちろんです。おひとり様から最大4名様まで体験いただけます。おひとりでじっくり楽しまれるお客様も多くいらっしゃいます。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>子どもも体験できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">安全上の理由から、対象年齢は<strong>中学生以上</strong>とさせていただいております。ご不明な点はLINEよりお気軽にお問い合わせください。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q03">子どもも体験できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n-html="faq.a03">安全上の理由から、対象年齢は<strong>中学生以上</strong>とさせていただいております。ご不明な点はLINEよりお気軽にお問い合わせください。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>金属アレルギーがあるのですが体験できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">金属アレルギーをお持ちの方には、使用素材について事前にご相談させていただいております。ご予約時にLINEにてお知らせください。また、事前に<a href="caution.html" class="text-link">注意事項ページ</a>もご確認いただけますと幸いです。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q04">金属アレルギーがあるのですが体験できますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n-html="faq.a04">金属アレルギーをお持ちの方には、使用素材について事前にご相談させていただいております。ご予約時にLINEにてお知らせください。また、事前に<a href="caution.html" class="text-link">注意事項ページ</a>もご確認いただけますと幸いです。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>完成したリングはその日に持ち帰れますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">はい、当日お持ち帰りいただけます。専用のパッケージにお入れしてお渡しします。プレゼントにもそのままご利用いただけます。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q05">完成したリングはその日に持ち帰れますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n="faq.a05">はい、当日お持ち帰りいただけます。専用のパッケージにお入れしてお渡しします。プレゼントにもそのままご利用いただけます。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>キャンセルポリシーを教えてください。</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">ご予約の変更・キャンセルは、ご予約日の<strong>前日20時まで</strong>に公式LINEよりご連絡ください。当日のキャンセルはキャンセル料が発生する場合がございます。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q06">キャンセルポリシーを教えてください。</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n-html="faq.a06">ご予約の変更・キャンセルは、ご予約日の<strong>前日20時まで</strong>に公式LINEよりご連絡ください。当日のキャンセルはキャンセル料が発生する場合がございます。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>駐車場はありますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">専用駐車場はございませんが、近隣にコインパーキングがございます。公共交通機関でのご来店もぜひご検討ください。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q07">駐車場はありますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n="faq.a07">専用駐車場はございませんが、近隣にコインパーキングがございます。公共交通機関でのご来店もぜひご検討ください。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>ペアリングは作れますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">同じコインやスプーンをお選びいただければペアリングとして仕上げることも可能です。カップルやご友人同士でのご体験をぜひどうぞ。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q08">ペアリングは作れますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n="faq.a08">同じコインやスプーンをお選びいただければペアリングとして仕上げることも可能です。カップルやご友人同士でのご体験をぜひどうぞ。</div></dd>
         </div>
 
         <div class="faq-item">
-          <dt><button class="faq-q" aria-expanded="false"><span>コインの種類はどのくらいありますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
-          <dd class="faq-a"><div class="faq-inner">常時数十種類のコインをご用意しております。アメリカ、ヨーロッパ、アジアなどさまざまな国のコインをご覧いただけます。詳しくは当日スタッフにお尋ねください。</div></dd>
+          <dt><button class="faq-q" aria-expanded="false"><span data-i18n="faq.q09">コインの種類はどのくらいありますか？</span><span class="faq-icon" aria-hidden="true"></span></button></dt>
+          <dd class="faq-a"><div class="faq-inner" data-i18n="faq.a09">常時数十種類のコインをご用意しております。アメリカ、ヨーロッパ、アジアなどさまざまな国のコインをご覧いただけます。詳しくは当日スタッフにお尋ねください。</div></dd>
         </div>
 
       </dl>
@@ -308,9 +323,9 @@
         <div class="footer-info">
           <p class="footer-logo">環<span>-wa-</span></p>
           <address>
-            <p>〒857-0877<br>長崎県佐世保市万津町２−８</p>
-            <p>営業時間：12:00 〜 20:00（最終予約 19:00）</p>
-            <p>完全予約制</p>
+            <p data-i18n-html="footer.address">〒857-0877<br>長崎県佐世保市万津町２−８</p>
+            <p data-i18n="footer.hours">営業時間：12:00 〜 20:00（最終予約 19:00）</p>
+            <p data-i18n="footer.byRes">完全予約制</p>
           </address>
           <div class="footer-sns">
             <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="sns-btn" aria-label="Instagram">
@@ -320,7 +335,7 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
             </a>
           </div>
-          <a href="reserve.html" class="btn btn-primary btn-sm">
+          <a href="reserve.html" class="btn btn-primary btn-sm" data-i18n="footer.reserveBtn">
             オンライン予約はこちら
           </a>
         </div>
@@ -336,8 +351,8 @@
 
       </div>
       <div class="footer-bottom">
-        <p>© 2026 環-wa- All Rights Reserved.</p>
-        <a href="caution.html" class="footer-link">注意事項</a>
+        <p data-i18n="footer.copyright">© 2026 環-wa- All Rights Reserved.</p>
+        <a href="caution.html" class="footer-link" data-i18n="footer.caution">注意事項</a>
       </div>
     </div>
   </footer>
@@ -346,13 +361,15 @@
   <div class="mobile-fixed-cta" role="navigation" aria-label="クイックアクション">
     <a href="https://line.me/R/ti/p/@wa_sasebo" target="_blank" rel="noopener" class="mcta-btn mcta-btn--line">
       <img src="images/icons8-line-48.png" width="20" height="20" alt="" aria-hidden="true">
-      <span>相談する</span>
+      <span data-i18n="mcta.consult">相談する</span>
     </a>
     <a href="reserve.html" class="mcta-btn mcta-btn--reserve">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <span>体験を予約</span>
+      <span data-i18n="mcta.reserve">体験を予約</span>
     </a>
   </div>
+
+  <script src="i18n.js"></script>
 
   <script>
     // Header: transparent → opaque on scroll
@@ -371,7 +388,6 @@
           cur = (cur + 1) % wraps.length;
           var wrap = wraps[cur];
           wrap.classList.add('active');
-          // Lazy-load current video on first switch
           var vid = wrap.querySelector('video[data-src]');
           if (vid) {
             vid.src = vid.dataset.src;
@@ -379,12 +395,10 @@
             vid.load();
             vid.play().catch(function(){});
           }
-          // Preload next video's metadata
           var nextVid = wraps[(cur + 1) % wraps.length].querySelector('video[data-src]');
           if (nextVid) { nextVid.preload = 'metadata'; }
         }, 7000);
       }
-      // Subtle parallax — bg moves slower than scroll
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         var heroBg      = document.getElementById('heroBg');
         var heroContent = document.getElementById('heroContent');
@@ -396,8 +410,8 @@
               var s = window.scrollY;
               var h = heroEl.offsetHeight;
               if (s <= h) {
-                heroBg.style.transform      = 'translateY(' + (s * 0.22).toFixed(1) + 'px)';
-                heroContent.style.opacity   = Math.max(0, 1 - s / (h * 0.55)).toFixed(3);
+                heroBg.style.transform    = 'translateY(' + (s * 0.22).toFixed(1) + 'px)';
+                heroContent.style.opacity = Math.max(0, 1 - s / (h * 0.55)).toFixed(3);
               }
               ticking = false;
             });
@@ -407,31 +421,18 @@
       }
     }());
 
-    // Mobile CTA: hidden during Hero, visible after scrolling past 75% of Hero height
+    // Mobile CTA visibility
     (function() {
       var cta  = document.querySelector('.mobile-fixed-cta');
       var hero = document.getElementById('hero');
       if (!cta || !hero) return;
-
-      var threshold = 0;
-      var ticking   = false;
-
-      function calcThreshold() {
-        threshold = hero.offsetTop + hero.offsetHeight * 0.75;
-      }
-
-      function updateCta() {
-        cta.classList.toggle('is-visible', window.scrollY > threshold);
-        ticking = false;
-      }
-
+      var threshold = 0, ticking = false;
+      function calcThreshold() { threshold = hero.offsetTop + hero.offsetHeight * 0.75; }
+      function updateCta() { cta.classList.toggle('is-visible', window.scrollY > threshold); ticking = false; }
       calcThreshold();
       window.addEventListener('resize', calcThreshold, { passive: true });
       window.addEventListener('scroll', function() {
-        if (!ticking) {
-          requestAnimationFrame(updateCta);
-          ticking = true;
-        }
+        if (!ticking) { requestAnimationFrame(updateCta); ticking = true; }
       }, { passive: true });
     }());
 
@@ -474,31 +475,21 @@
   </script>
 
   <script>
-    // ── PHASE4: Reveal + Image Parallax ─────────────────────
+    // Reveal + Image Parallax
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      // Stagger delay — based on sibling position within same parent
       document.querySelectorAll('.reveal').forEach(function (el) {
         var peers = Array.from(el.parentElement.querySelectorAll('.reveal'));
         var idx   = peers.indexOf(el);
         if (idx > 0) el.style.transitionDelay = (idx * 0.08).toFixed(2) + 's';
       });
-
-      // Intersection Observer — fire once per element
       var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            obs.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
       document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
-
-      // Image parallax — very subtle translateY
-      var pEls  = document.querySelectorAll('[data-parallax]');
+      var pEls = document.querySelectorAll('[data-parallax]');
       var ptick = false;
       if (pEls.length) {
         window.addEventListener('scroll', function () {
@@ -522,60 +513,41 @@
   </script>
 
   <script>
-    // ── Loader ──────────────────────────────────────────────
+    // Loader
     (function () {
       var loader = document.getElementById('loader');
       if (!loader) return;
-
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        loader.remove();
-        return;
-      }
-
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { loader.remove(); return; }
       var arc     = document.getElementById('ring-arc');
       var counter = document.getElementById('loader-counter');
       var text    = document.getElementById('loader-text');
       var brand   = document.querySelector('.loader-brand');
-      var C       = 2 * Math.PI * 38; // circumference ≈ 238.76
-
+      var C       = 2 * Math.PI * 38;
       arc.style.strokeDasharray  = C;
       arc.style.strokeDashoffset = C;
-
-      var DURATION  = 2200;
-      var startTime = null;
-
-      function ease(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      }
-
+      var DURATION = 2200, startTime = null;
+      function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
       function tick(ts) {
         if (!startTime) startTime = ts;
         var raw = Math.min((ts - startTime) / DURATION, 1);
         var p   = ease(raw);
-
         arc.style.strokeDashoffset = C * (1 - p);
         counter.textContent = String(Math.floor(p * 100)).padStart(3, '0') + '%';
-
-        if (raw < 1) {
-          requestAnimationFrame(tick);
-        } else {
+        if (raw < 1) { requestAnimationFrame(tick); }
+        else {
           arc.style.strokeDashoffset = 0;
           counter.textContent = '100%';
-
           setTimeout(function () {
             counter.classList.add('hide');
             text.classList.add('show');
             if (brand) brand.classList.add('lit');
             setTimeout(function () {
               loader.classList.add('is-done');
-              loader.addEventListener('transitionend', function () {
-                loader.remove();
-              }, { once: true });
+              loader.addEventListener('transitionend', function () { loader.remove(); }, { once: true });
             }, 1100);
           }, 300);
         }
       }
-
       requestAnimationFrame(tick);
     }());
   </script>

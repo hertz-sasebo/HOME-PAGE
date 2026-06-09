@@ -369,16 +369,34 @@
       <a href="index.html" class="logo">環<span>-wa-</span></a>
       <nav>
         <ul class="nav-links" id="navLinks">
-          <li><a href="index.html#about">リングについて</a></li>
-          <li><a href="index.html#flow">体験の流れ</a></li>
-          <li><a href="index.html#pricing">料金</a></li>
+          <li><a href="index.html#about" data-i18n="nav.about">リングについて</a></li>
+          <li><a href="index.html#flow" data-i18n="nav.flow">体験の流れ</a></li>
+          <li><a href="index.html#pricing" data-i18n="nav.pricing">料金</a></li>
           <li><a href="index.html#faq">FAQ</a></li>
-          <li><a href="shop.html" aria-current="page">ショップ</a></li>
+          <li><a href="shop.html" aria-current="page" data-i18n="nav.shop">ショップ</a></li>
           <li>
-            <a href="reserve.html" class="btn btn-nav">予約する</a>
+            <a href="reserve.html" class="btn btn-nav" data-i18n="nav.reserve">予約する</a>
+          </li>
+          <!-- Mobile lang switcher — shown only in hamburger overlay -->
+          <li class="nav-lang-item">
+            <div class="lang-switcher lang-switcher--mobile" aria-label="言語切替">
+              <button class="lang-btn" data-lang="ja">JA</button>
+              <button class="lang-btn" data-lang="en">EN</button>
+              <button class="lang-btn" data-lang="zh">中</button>
+              <button class="lang-btn" data-lang="ko">한</button>
+            </div>
           </li>
         </ul>
-        <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <!-- Desktop lang switcher -->
+        <div class="lang-switcher" aria-label="言語切替">
+          <button class="lang-btn" data-lang="ja">JA</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="zh">中</button>
+          <button class="lang-btn" data-lang="ko">한</button>
+        </div>
+        <button class="hamburger" id="hamburger"
+                data-i18n-aria="burger.open"
+                aria-label="メニューを開く" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </nav>
@@ -388,8 +406,8 @@
   <!-- HERO -->
   <div class="shop-hero">
     <div class="container">
-      <span class="section-label">ONLINE SHOP</span>
-      <h1>コインリング オーダー</h1>
+      <span class="section-label" data-i18n="shop.hero.label">ONLINE SHOP</span>
+      <h1 data-i18n="shop.hero.title">コインリング オーダー</h1>
     </div>
   </div>
 
@@ -397,7 +415,7 @@
   <section class="shop-section">
     <div class="container">
       <div class="shop-intro">
-        <p>世界各国から集めたコインを、指輪に仕上げた完成品をお届けします。<br>ご希望のサイズをお選びいただき、そのままオンラインでご注文いただけます。</p>
+        <p data-i18n-html="shop.intro">世界各国から集めたコインを、指輪に仕上げた完成品をお届けします。<br>ご希望のサイズをお選びいただき、そのままオンラインでご注文いただけます。</p>
       </div>
       <div class="shop-grid" id="shopGrid"></div>
     </div>
@@ -407,11 +425,11 @@
   <div id="shopModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalCoinName">
     <div class="modal-box">
       <button class="modal-close" id="modalClose" aria-label="閉じる">&#215;</button>
-      <p class="modal-eyebrow">COIN RING ORDER</p>
+      <p class="modal-eyebrow" data-i18n="shop.modal.eyebrow">COIN RING ORDER</p>
       <h2 class="modal-coin-name" id="modalCoinName"></h2>
       <p class="modal-price">¥4,000<small>（税込）</small></p>
       <div class="modal-divider"></div>
-      <p class="modal-size-label">SIZE / 号数</p>
+      <p class="modal-size-label" data-i18n="shop.modal.sizeLabel">SIZE / 号数</p>
       <div class="size-grid" id="sizeGrid"></div>
       <a id="checkoutBtn" class="btn-checkout btn-checkout--disabled" href="#" aria-disabled="true">
         号数を選択してください
@@ -424,31 +442,31 @@
     <div class="container">
       <div class="section-head">
         <span class="section-label">NOTES</span>
-        <h2>ご注文の前に</h2>
+        <h2 data-i18n="shop.notes.heading">ご注文の前に</h2>
         <div class="divider"></div>
       </div>
       <div class="shop-notes-body">
         <div class="note-item">
-          <h3>仕上がりについて</h3>
-          <p>コインリングは一点一点手作業で仕上げています。使用するコインの個体差により、リングの幅・模様の出方・質感に多少の差が生じる場合がございます。あらかじめご了承ください。</p>
-          <p>サイズは号数を基準に製作いたしますが、コインの素材・厚みによっては若干の誤差が生じることがあります。</p>
+          <h3 data-i18n="shop.notes.finish.title">仕上がりについて</h3>
+          <p data-i18n="shop.notes.finish.p1">コインリングは一点一点手作業で仕上げています。使用するコインの個体差により、リングの幅・模様の出方・質感に多少の差が生じる場合がございます。あらかじめご了承ください。</p>
+          <p data-i18n="shop.notes.finish.p2">サイズは号数を基準に製作いたしますが、コインの素材・厚みによっては若干の誤差が生じることがあります。</p>
         </div>
         <div class="note-item">
-          <h3>発送について</h3>
-          <p>ご注文から 7〜14日程度でのお届けを予定しております。混雑状況により前後する場合がございます。発送完了後にメールにてお知らせいたします。</p>
+          <h3 data-i18n="shop.notes.ship.title">発送について</h3>
+          <p data-i18n="shop.notes.ship.p">ご注文から 7〜14日程度でのお届けを予定しております。混雑状況により前後する場合がございます。発送完了後にメールにてお知らせいたします。</p>
         </div>
         <div class="note-item">
-          <h3>返品・キャンセルについて</h3>
-          <p>オーダーメイド品の性質上、お客様のご都合による返品・交換・キャンセルはお受けできません。商品の不良・配送事故の場合は公式LINEよりご連絡ください。</p>
+          <h3 data-i18n="shop.notes.cancel.title">返品・キャンセルについて</h3>
+          <p data-i18n="shop.notes.cancel.p">オーダーメイド品の性質上、お客様のご都合による返品・交換・キャンセルはお受けできません。商品の不良・配送事故の場合は公式LINEよりご連絡ください。</p>
         </div>
         <div class="note-item">
-          <h3>金属アレルギーについて</h3>
-          <p>使用するコインには銅・真鍮・ニッケルなどの金属が含まれています。金属アレルギーをお持ちの方はご購入前に素材をご確認のうえご注文ください。</p>
+          <h3 data-i18n="shop.notes.allergy.title">金属アレルギーについて</h3>
+          <p data-i18n="shop.notes.allergy.p">使用するコインには銅・真鍮・ニッケルなどの金属が含まれています。金属アレルギーをお持ちの方はご購入前に素材をご確認のうえご注文ください。</p>
         </div>
       </div>
       <a href="index.html" class="back-btn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-        トップページへ戻る
+        <span data-i18n="shop.backBtn">トップページへ戻る</span>
       </a>
     </div>
   </section>
@@ -460,9 +478,9 @@
         <div class="footer-info">
           <p class="footer-logo">環<span>-wa-</span></p>
           <address>
-            <p>〒857-0877<br>長崎県佐世保市万津町２−８</p>
-            <p>営業時間：12:00 〜 20:00（最終予約 19:00）</p>
-            <p>完全予約制</p>
+            <p data-i18n-html="footer.address">〒857-0877<br>長崎県佐世保市万津町２−８</p>
+            <p data-i18n="footer.hours">営業時間：12:00 〜 20:00（最終予約 19:00）</p>
+            <p data-i18n="footer.byRes">完全予約制</p>
           </address>
           <div class="footer-sns">
             <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="sns-btn" aria-label="Instagram">
@@ -483,11 +501,13 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 環-wa- All Rights Reserved.</p>
-        <a href="caution.html" class="footer-link">注意事項</a>
+        <p data-i18n="footer.copyright">© 2026 環-wa- All Rights Reserved.</p>
+        <a href="caution.html" class="footer-link" data-i18n="footer.caution">注意事項</a>
       </div>
     </div>
   </footer>
+
+  <script src="i18n.js"></script>
 
   <script>
     // ── Header scroll ─────────────────────────────────────────
@@ -514,52 +534,71 @@
       });
     });
 
-    // ── Product data ──────────────────────────────────────────
+    // ── Product data — multi-language names ───────────────────
     const coins = [
-      { id: 1, name: 'アメリカ 25セント記念', stock: 100 },
-      { id: 2, name: 'フランス 10フラン',    stock: 70  },
-      { id: 3, name: 'メキシコ 1ペソ',       stock: 150 },
-      { id: 4, name: 'オランダ 1ギルダー',   stock: 107 },
-      { id: 5, name: 'フィリピン 1ペソ',     stock: 80  },
-      { id: 6, name: '香港 1ドル エリザベス', stock: 35  },
-      { id: 7, name: '香港 20セント',        stock: 100 },
-      { id: 8, name: 'ベルギー 5フラン',     stock: 75  },
+      { id: 1, names: { ja: 'アメリカ 25セント記念', en: 'USA Quarter Dollar',          zh: '美国 25美分纪念',        ko: '미국 25센트 기념'        }, stock: 100 },
+      { id: 2, names: { ja: 'フランス 10フラン',    en: 'France 10 Francs',             zh: '法国 10法郎',            ko: '프랑스 10프랑'           }, stock: 70  },
+      { id: 3, names: { ja: 'メキシコ 1ペソ',       en: 'Mexico 1 Peso',                zh: '墨西哥 1比索',           ko: '멕시코 1페소'            }, stock: 150 },
+      { id: 4, names: { ja: 'オランダ 1ギルダー',   en: 'Netherlands 1 Guilder',        zh: '荷兰 1荷兰盾',           ko: '네덜란드 1길더'          }, stock: 107 },
+      { id: 5, names: { ja: 'フィリピン 1ペソ',     en: 'Philippines 1 Peso',           zh: '菲律宾 1比索',           ko: '필리핀 1페소'            }, stock: 80  },
+      { id: 6, names: { ja: '香港 1ドル エリザベス', en: 'Hong Kong $1 Elizabeth',       zh: '香港 1元 伊丽莎白',      ko: '홍콩 1달러 엘리자베스'   }, stock: 35  },
+      { id: 7, names: { ja: '香港 20セント',        en: 'Hong Kong 20 Cents',           zh: '香港 20分',             ko: '홍콩 20센트'             }, stock: 100 },
+      { id: 8, names: { ja: 'ベルギー 5フラン',     en: 'Belgium 5 Francs',             zh: '比利时 5法郎',           ko: '벨기에 5프랑'            }, stock: 75  },
     ];
 
     const PLACEHOLDER = 'https://placehold.co/400x400/f5f0e8/c4933f?text=COIN';
 
+    // ── Helpers ───────────────────────────────────────────────
+    function getLang()             { return window._waLang || 'ja'; }
+    function getCoinName(coin)     { return coin.names[getLang()] || coin.names.ja; }
+
+    const stockLabel  = { ja: '在庫 ',     en: 'In stock: ', zh: '库存 ',  ko: '재고 ' };
+    const orderLabel  = { ja: 'オーダーする', en: 'Order',    zh: '下单',  ko: '주문하기' };
+    const taxLabel    = { ja: '（税込）',  en: '(tax incl.)', zh: '（含税）', ko: '（세금 포함）' };
+
     // ── Render product cards ──────────────────────────────────
     const grid = document.getElementById('shopGrid');
-    coins.forEach(coin => {
-      const card = document.createElement('article');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <div class="product-imgs">
-          <div class="product-img-wrap">
-            <img src="${PLACEHOLDER}" alt="${coin.name} コイン" loading="lazy" width="400" height="400">
-            <span class="img-label">COIN</span>
+
+    function renderGrid() {
+      const lang    = getLang();
+      const sLabel  = stockLabel[lang]  || stockLabel.ja;
+      const oLabel  = orderLabel[lang]  || orderLabel.ja;
+      const tLabel  = taxLabel[lang]    || taxLabel.ja;
+      grid.innerHTML = '';
+      coins.forEach(coin => {
+        const name = getCoinName(coin);
+        const card = document.createElement('article');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-imgs">
+            <div class="product-img-wrap">
+              <img src="${PLACEHOLDER}" alt="${name} コイン" loading="lazy" width="400" height="400">
+              <span class="img-label">COIN</span>
+            </div>
+            <div class="product-img-wrap">
+              <img src="${PLACEHOLDER}" alt="${name} リング仕上がり例" loading="lazy" width="400" height="400">
+              <span class="img-label">RING</span>
+            </div>
           </div>
-          <div class="product-img-wrap">
-            <img src="${PLACEHOLDER}" alt="${coin.name} リング仕上がり例" loading="lazy" width="400" height="400">
-            <span class="img-label">RING</span>
+          <div class="product-body">
+            <span class="product-cat">COIN RING</span>
+            <h3 class="product-name">${name}</h3>
+            <p class="product-stock">
+              <span class="stock-dot" aria-hidden="true"></span>
+              ${sLabel}${coin.stock.toLocaleString()}
+            </p>
+            <p class="product-price">¥4,000<small>${tLabel}</small></p>
+            <button class="btn-order" data-id="${coin.id}" aria-label="${name}">
+              ${oLabel}
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
-        </div>
-        <div class="product-body">
-          <span class="product-cat">COIN RING</span>
-          <h3 class="product-name">${coin.name}</h3>
-          <p class="product-stock">
-            <span class="stock-dot" aria-hidden="true"></span>
-            在庫 ${coin.stock.toLocaleString()}
-          </p>
-          <p class="product-price">¥4,000<small>（税込）</small></p>
-          <button class="btn-order" data-id="${coin.id}" aria-label="${coin.name} をオーダーする">
-            オーダーする
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    renderGrid();
 
     // ── Size buttons ──────────────────────────────────────────
     const sizeGrid = document.getElementById('sizeGrid');
@@ -574,15 +613,17 @@
     }
 
     // ── Modal state ───────────────────────────────────────────
-    const modal       = document.getElementById('shopModal');
-    const coinNameEl  = document.getElementById('modalCoinName');
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    const STRIPE_URL  = 'https://buy.stripe.com/14A6oG7jq54gedp0dVfbq02';
-    let selectedSize  = null;
+    const modal        = document.getElementById('shopModal');
+    const coinNameEl   = document.getElementById('modalCoinName');
+    const checkoutBtn  = document.getElementById('checkoutBtn');
+    const STRIPE_URL   = 'https://buy.stripe.com/14A6oG7jq54gedp0dVfbq02';
+    let selectedSize   = null;
+    let currentCoinId  = null;
 
     function openModal(coinId) {
+      currentCoinId = coinId;
       const coin = coins.find(c => c.id === coinId);
-      coinNameEl.textContent = coin.name;
+      coinNameEl.textContent = getCoinName(coin);
       selectedSize = null;
       sizeGrid.querySelectorAll('.size-btn').forEach(b => b.classList.remove('is-selected'));
       setCheckoutState(false);
@@ -607,15 +648,18 @@
     }
 
     function setCheckoutState(active) {
+      const lang = getLang();
       if (active) {
-        checkoutBtn.textContent = `${selectedSize}号でオーダーする`;
-        checkoutBtn.className = 'btn-checkout btn-checkout--active';
-        checkoutBtn.href = STRIPE_URL;
+        const tpl = (window.waI18n && window.waI18n.get(lang, 'shop.modal.checkout')) || '{size}号でオーダーする';
+        checkoutBtn.textContent = tpl.replace('{size}', selectedSize);
+        checkoutBtn.className   = 'btn-checkout btn-checkout--active';
+        checkoutBtn.href        = STRIPE_URL;
         checkoutBtn.removeAttribute('aria-disabled');
       } else {
-        checkoutBtn.textContent = '号数を選択してください';
-        checkoutBtn.className = 'btn-checkout btn-checkout--disabled';
-        checkoutBtn.href = '#';
+        const empty = (window.waI18n && window.waI18n.get(lang, 'shop.modal.checkoutEmpty')) || '号数を選択してください';
+        checkoutBtn.textContent = empty;
+        checkoutBtn.className   = 'btn-checkout btn-checkout--disabled';
+        checkoutBtn.href        = '#';
         checkoutBtn.setAttribute('aria-disabled', 'true');
       }
     }
@@ -634,7 +678,21 @@
     // Close triggers
     document.getElementById('modalClose').addEventListener('click', closeModal);
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    // ── Language change handler ───────────────────────────────
+    document.addEventListener('wa:langchange', () => {
+      renderGrid();
+      // Update modal coin name if modal is open
+      if (currentCoinId !== null && modal.classList.contains('is-open')) {
+        const coin = coins.find(c => c.id === currentCoinId);
+        if (coin) coinNameEl.textContent = getCoinName(coin);
+        // Refresh checkout button text with new language
+        setCheckoutState(selectedSize !== null);
+      }
+    });
   </script>
 </body>
 </html>
