@@ -212,7 +212,7 @@
   <section id="pricing" class="section section-dark">
     <div class="container">
       <div class="section-head section-head--light reveal">
-        <span class="section-label">PRICE</span>
+        <span class="section-label" data-i18n="pricing.label">PRICE</span>
         <h2 data-i18n="pricing.heading">料金案内</h2>
         <div class="divider divider--light"></div>
       </div>
@@ -220,8 +220,8 @@
 
         <div class="price-card price-card--main reveal">
           <span class="price-badge" data-i18n="pricing.badge">人気</span>
-          <span class="price-cat" data-i18n="pricing.ring.cat">リング手作り体験</span>
-          <div class="price-val">¥6,500~<small>/名（税込）</small></div>
+          <span class="price-cat" data-i18n="pricing.ring.cat">指輪手作り体験</span>
+          <div class="price-val">¥6,500~<small data-i18n="pricing.ring.taxNote">/名（税込）</small></div>
           <ul class="price-meta">
             <li data-i18n="pricing.ring.meta1">所要時間：40分〜1時間</li>
             <li data-i18n="pricing.ring.meta2">体験人数：1〜4名</li>
@@ -230,8 +230,8 @@
         </div>
 
         <div class="price-card reveal">
-          <span class="price-cat" data-i18n="pricing.order.cat">オーダーメイドリング</span>
-          <div class="price-val">¥5,500~<small>/名（税込）</small></div>
+          <span class="price-cat" data-i18n="pricing.order.cat">カスタムリング</span>
+          <div class="price-val">¥5,500~<small data-i18n="pricing.ring.taxNote">/名（税込）</small></div>
           <ul class="price-meta">
             <li data-i18n="pricing.order.meta1">ご要望に合わせてデザイン</li>
             <li data-i18n="pricing.order.meta2">詳細はLINEにてご相談</li>
@@ -461,6 +461,7 @@
     hamburger.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
+      header.classList.toggle('menu-open', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
@@ -468,6 +469,7 @@
       a.addEventListener('click', () => {
         navLinks.classList.remove('open');
         hamburger.classList.remove('open');
+        header.classList.remove('menu-open');
         hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       });
