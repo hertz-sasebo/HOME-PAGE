@@ -59,7 +59,7 @@
         ring:    { cat: '指輪手作り体験', meta1: '所要時間：40分〜1時間', meta2: '体験人数：1〜4名', meta3: '対象年齢：中学生以上', taxNote: '/名（税込）' },
         order:   { cat: 'カスタムリング', meta1: 'ご要望に合わせてデザイン', meta2: '詳細はLINEにてご相談' },
         option:  { cat: '追加オプション', pendant: 'ペンダントトップ' },
-        sale:    { cat: '販売商品', name: 'コインリング', desc: '体験が難しい方もお気軽にどうぞ。' },
+        sale:    { cat: '販売商品', name: 'コインリング', desc: '体験が難しい方もお気軽にどうぞ。', taxNote: '（税込）' },
       },
       faq: {
         heading: 'よくある質問',
@@ -170,7 +170,7 @@
         ring:    { cat: 'Ring Making Experience', meta1: 'Duration: 40–60 min', meta2: 'Capacity: 1–4 people', meta3: 'Age: Junior high and up', taxNote: '/person (tax incl.)' },
         order:   { cat: 'Custom Ring', meta1: 'Designed to your request', meta2: 'Details via LINE' },
         option:  { cat: 'Add-on Option', pendant: 'Pendant Top' },
-        sale:    { cat: 'For Sale', name: 'Coin Ring', desc: 'Perfect if you\'d prefer one without the workshop.' },
+        sale:    { cat: 'For Sale', name: 'Coin Ring', desc: 'Perfect if you\'d prefer one without the workshop.', taxNote: '(tax incl.)' },
       },
       faq: {
         heading: 'FAQ',
@@ -272,7 +272,7 @@
         ring:    { cat: '戒指手作体验', meta1: '所需时间：40分钟〜1小时', meta2: '体验人数：1〜4人', meta3: '适用年龄：初中生以上', taxNote: '/名（税込）' },
         order:   { cat: '定制戒指', meta1: '根据您的需求设计', meta2: '详情请通过LINE咨询' },
         option:  { cat: '附加选项', pendant: '吊坠头' },
-        sale:    { cat: '销售商品', name: '硬币戒指', desc: '无法参与体验的朋友也欢迎选购。' },
+        sale:    { cat: '销售商品', name: '硬币戒指', desc: '无法参与体验的朋友也欢迎选购。', taxNote: '（含税）' },
       },
       faq: {
         heading: '常见问题',
@@ -374,7 +374,7 @@
         ring:    { cat: '반지 수제 체험', meta1: '소요시간：40분~1시간', meta2: '체험 인원：1~4명', meta3: '대상 연령：중학생 이상', taxNote: '/명（세금 포함）' },
         order:   { cat: '맞춤 반지', meta1: '요청에 맞게 디자인', meta2: '자세한 내용은 LINE으로 문의' },
         option:  { cat: '추가 옵션', pendant: '펜던트 탑' },
-        sale:    { cat: '판매 상품', name: '코인링', desc: '체험이 어려우신 분도 편하게 구입하세요.' },
+        sale:    { cat: '판매 상품', name: '코인링', desc: '체험이 어려우신 분도 편하게 구입하세요.', taxNote: '（세금 포함）' },
       },
       faq: {
         heading: '자주 묻는 질문',
