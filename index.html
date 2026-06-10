@@ -27,7 +27,7 @@
         <span id="loader-counter" class="loader-counter">0</span>
         <div id="loader-text" class="loader-text">
           <span class="loader-copy-jp" data-i18n="loader.copyJp">記憶を、環に。</span>
-          <span class="loader-copy-en">Forge your memory.</span>
+          <span class="loader-copy-en">Turn memories into a ring.</span>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
           </li>
           <!-- Mobile lang switcher — shown only in hamburger overlay -->
           <li class="nav-lang-item">
-            <div class="lang-switcher lang-switcher--mobile" aria-label="言語切替">
+            <div class="lang-switcher lang-switcher--mobile" data-i18n-aria="aria.langSwitcher" aria-label="言語切替">
               <button class="lang-btn" data-lang="ja">JA</button>
               <button class="lang-btn" data-lang="en">EN</button>
               <button class="lang-btn" data-lang="zh">中</button>
@@ -58,7 +58,7 @@
           </li>
         </ul>
         <!-- Desktop lang switcher -->
-        <div class="lang-switcher" aria-label="言語切替">
+        <div class="lang-switcher" data-i18n-aria="aria.langSwitcher" aria-label="言語切替">
           <button class="lang-btn" data-lang="ja">JA</button>
           <button class="lang-btn" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="zh">中</button>
@@ -124,7 +124,7 @@
       <div class="about-grid">
 
         <div class="about-card reveal">
-          <div class="about-img" data-parallax><img src="images/スプーンリング.png" alt="スプーンリング" loading="lazy"></div>
+          <div class="about-img" data-parallax><img src="images/スプーンリング.png" data-i18n-alt="alt.spoonRing" alt="スプーンリング" loading="lazy"></div>
           <span class="about-tag">SPOON RING</span>
           <h3 data-i18n="about.spoon.title">スプーンリング</h3>
           <p data-i18n="about.spoon.p1">スプーンリングには、100年以上の歴史があります。かつてヨーロッパでは、銀のスプーンは家族が受け継ぐ大切な財産のひとつ。そのスプーンをリングに作り替えて愛する人へ贈る、という婚約の習慣が生まれました。</p>
@@ -132,7 +132,7 @@
         </div>
 
         <div class="about-card reveal">
-          <div class="about-img" data-parallax><img src="images/コインリング.png" alt="コインリング" loading="lazy"></div>
+          <div class="about-img" data-parallax><img src="images/コインリング.png" data-i18n-alt="alt.coinRing" alt="コインリング" loading="lazy"></div>
           <span class="about-tag">COIN RING</span>
           <h3 data-i18n="about.coin.title">コインリング</h3>
           <p data-i18n="about.coin.p1">アメリカ、ヨーロッパ、アジア……世界中から集めたコインを、あなただけの指輪に。デザインや歴史が刻まれたコインをひとつ選び、自分の手でリングへと生まれ変わらせる工程はまるで小さな冒険です。</p>
@@ -345,6 +345,7 @@
             src="https://maps.google.com/maps?q=長崎県佐世保市万津町2-8&hl=ja&z=17&output=embed"
             allowfullscreen
             loading="lazy"
+            data-i18n-title="map.title"
             title="環-wa- アクセスマップ"
           ></iframe>
         </div>
@@ -358,7 +359,7 @@
   </footer>
 
   <!-- MOBILE FIXED CTA -->
-  <div class="mobile-fixed-cta" role="navigation" aria-label="クイックアクション">
+  <div class="mobile-fixed-cta" role="navigation" data-i18n-aria="aria.quickActions" aria-label="クイックアクション">
     <a href="https://line.me/R/ti/p/@wa_sasebo" target="_blank" rel="noopener" class="mcta-btn mcta-btn--line">
       <img src="images/icons8-line-48.png" width="20" height="20" alt="" aria-hidden="true">
       <span data-i18n="mcta.consult">相談する</span>

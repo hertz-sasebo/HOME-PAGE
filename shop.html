@@ -361,7 +361,7 @@
     }
   </style>
 </head>
-<body>
+<body data-i18n-page-title="shop.meta.title" data-i18n-page-desc="shop.meta.desc">
 
   <!-- HEADER -->
   <header id="header" class="scrolled">
@@ -379,7 +379,7 @@
           </li>
           <!-- Mobile lang switcher — shown only in hamburger overlay -->
           <li class="nav-lang-item">
-            <div class="lang-switcher lang-switcher--mobile" aria-label="言語切替">
+            <div class="lang-switcher lang-switcher--mobile" data-i18n-aria="aria.langSwitcher" aria-label="言語切替">
               <button class="lang-btn" data-lang="ja">JA</button>
               <button class="lang-btn" data-lang="en">EN</button>
               <button class="lang-btn" data-lang="zh">中</button>
@@ -388,7 +388,7 @@
           </li>
         </ul>
         <!-- Desktop lang switcher -->
-        <div class="lang-switcher" aria-label="言語切替">
+        <div class="lang-switcher" data-i18n-aria="aria.langSwitcher" aria-label="言語切替">
           <button class="lang-btn" data-lang="ja">JA</button>
           <button class="lang-btn" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="zh">中</button>
@@ -424,14 +424,14 @@
   <!-- ORDER MODAL -->
   <div id="shopModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalCoinName">
     <div class="modal-box">
-      <button class="modal-close" id="modalClose" aria-label="閉じる">&#215;</button>
+      <button class="modal-close" id="modalClose" data-i18n-aria="aria.close" aria-label="閉じる">&#215;</button>
       <p class="modal-eyebrow" data-i18n="shop.modal.eyebrow">COIN RING ORDER</p>
       <h2 class="modal-coin-name" id="modalCoinName"></h2>
-      <p class="modal-price">¥4,000<small>（税込）</small></p>
+      <p class="modal-price">¥4,000<small data-i18n="shop.modal.priceTax">（税込）</small></p>
       <div class="modal-divider"></div>
       <p class="modal-size-label" data-i18n="shop.modal.sizeLabel">SIZE / 号数</p>
       <div class="size-grid" id="sizeGrid"></div>
-      <a id="checkoutBtn" class="btn-checkout btn-checkout--disabled" href="#" aria-disabled="true">
+      <a id="checkoutBtn" class="btn-checkout btn-checkout--disabled" href="#" aria-disabled="true" data-i18n="shop.modal.checkoutEmpty">
         号数を選択してください
       </a>
     </div>
@@ -496,6 +496,7 @@
             src="https://maps.google.com/maps?q=長崎県佐世保市万津町2-8&hl=ja&z=17&output=embed"
             allowfullscreen
             loading="lazy"
+            data-i18n-title="map.title"
             title="環-wa- アクセスマップ"
           ></iframe>
         </div>
@@ -556,6 +557,14 @@
     const orderLabel  = { ja: 'オーダーする', en: 'Order',    zh: '下单',  ko: '주문하기' };
     const taxLabel    = { ja: '（税込）',  en: '(tax incl.)', zh: '（含税）', ko: '（세금 포함）' };
 
+    function i18nText(lang, key, fallback) {
+      return (window.waI18n && window.waI18n.get(lang, key)) || fallback;
+    }
+
+    function formatText(tpl, vars) {
+      return String(tpl).replace(/\{(\w+)\}/g, (_, key) => vars[key] !== undefined ? vars[key] : '');
+    }
+
     // ── Render product cards ──────────────────────────────────
     const grid = document.getElementById('shopGrid');
 
@@ -564,19 +573,23 @@
       const sLabel  = stockLabel[lang]  || stockLabel.ja;
       const oLabel  = orderLabel[lang]  || orderLabel.ja;
       const tLabel  = taxLabel[lang]    || taxLabel.ja;
+      const coinAltTpl = i18nText(lang, 'shop.imgAlt.coin', '{name} コイン');
+      const ringAltTpl = i18nText(lang, 'shop.imgAlt.ring', '{name} リング仕上がり例');
       grid.innerHTML = '';
       coins.forEach(coin => {
         const name = getCoinName(coin);
+        const coinAlt = formatText(coinAltTpl, { name });
+        const ringAlt = formatText(ringAltTpl, { name });
         const card = document.createElement('article');
         card.className = 'product-card';
         card.innerHTML = `
           <div class="product-imgs">
             <div class="product-img-wrap">
-              <img src="${PLACEHOLDER}" alt="${name} コイン" loading="lazy" width="400" height="400">
+              <img src="${PLACEHOLDER}" alt="${coinAlt}" loading="lazy" width="400" height="400">
               <span class="img-label">COIN</span>
             </div>
             <div class="product-img-wrap">
-              <img src="${PLACEHOLDER}" alt="${name} リング仕上がり例" loading="lazy" width="400" height="400">
+              <img src="${PLACEHOLDER}" alt="${ringAlt}" loading="lazy" width="400" height="400">
               <span class="img-label">RING</span>
             </div>
           </div>
@@ -607,9 +620,17 @@
       btn.className = 'size-btn';
       btn.dataset.size = s;
       btn.textContent = s;
-      btn.setAttribute('aria-label', `${s}号`);
+      btn.setAttribute('aria-label', formatText(i18nText(getLang(), 'shop.sizeAria', '{size}号'), { size: s }));
       btn.addEventListener('click', () => selectSize(s));
       sizeGrid.appendChild(btn);
+    }
+
+    function updateSizeButtonLabels() {
+      const lang = getLang();
+      const tpl = i18nText(lang, 'shop.sizeAria', '{size}号');
+      sizeGrid.querySelectorAll('.size-btn').forEach(btn => {
+        btn.setAttribute('aria-label', formatText(tpl, { size: btn.dataset.size }));
+      });
     }
 
     // ── Modal state ───────────────────────────────────────────
@@ -685,6 +706,7 @@
     // ── Language change handler ───────────────────────────────
     document.addEventListener('wa:langchange', () => {
       renderGrid();
+      updateSizeButtonLabels();
       // Update modal coin name if modal is open
       if (currentCoinId !== null && modal.classList.contains('is-open')) {
         const coin = coins.find(c => c.id === currentCoinId);

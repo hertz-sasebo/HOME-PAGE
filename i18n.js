@@ -91,12 +91,18 @@
         caution:    '注意事項',
       },
       mcta:    { consult: '相談する', reserve: '体験を予約' },
+      aria:    { langSwitcher: '言語切替', quickActions: 'クイックアクション', close: '閉じる' },
+      alt:     { spoonRing: 'スプーンリング', coinRing: 'コインリング', lineAdd: '友だち追加' },
+      map:     { title: '環-wa- アクセスマップ' },
       loader:  { ariaLabel: '読み込み中', copyJp: '記憶を、環に。' },
       burger:  { open: 'メニューを開く' },
       shop: {
+        meta: { title: 'コインリング オーダー | 環-wa-', desc: '環-wa- のオンラインショップ。世界各国のコインから手作りしたリングをサイズオーダーで購入できます。¥4,000（税込）。' },
         hero:  { label: 'ONLINE SHOP', title: 'コインリング オーダー' },
         intro: '世界各国から集めたコインを、指輪に仕上げた完成品をお届けします。<br>ご希望のサイズをお選びいただき、そのままオンラインでご注文いただけます。',
-        modal: { eyebrow: 'COIN RING ORDER', sizeLabel: 'SIZE / 号数', checkoutEmpty: '号数を選択してください', checkout: '{size}号でオーダーする' },
+        modal: { eyebrow: 'COIN RING ORDER', priceTax: '（税込）', sizeLabel: 'SIZE / 号数', checkoutEmpty: '号数を選択してください', checkout: '{size}号でオーダーする' },
+        imgAlt: { coin: '{name} コイン', ring: '{name} リング仕上がり例' },
+        sizeAria: '{size}号',
         notes: {
           heading: 'ご注文の前に',
           finish:  { title: '仕上がりについて', p1: 'コインリングは一点一点手作業で仕上げています。使用するコインの個体差により、リングの幅・模様の出方・質感に多少の差が生じる場合がございます。あらかじめご了承ください。', p2: 'サイズは号数を基準に製作いたしますが、コインの素材・厚みによっては若干の誤差が生じることがあります。' },
@@ -116,6 +122,38 @@
           { ja: 'ベルギー 5フラン',     en: 'Belgium 5 Francs',   zh: '比利时 5法郎',   ko: '벨기에 5프랑' },
         ],
       },
+      reservePage: {
+        meta: { title: 'ご予約 | 環 -wa-' },
+        header: { title: '環 -wa- ご予約' },
+        notice: {
+          label: 'お知らせ',
+          p1: '・12歳以下のお客様は、保護者の方ご同伴でのご利用をお願いいたします。<br>・店内環境の都合上、ペット同伴でのご来店はご遠慮いただいております。<br>・お持ち込み素材につきましては、素材や状態によって加工が難しい場合がございます。事前に公式LINEよりご相談いただけますとスムーズにご案内可能です。',
+          p2: 'その他ご不明点やご相談は、公式LINEよりお気軽にお問い合わせください。<br>ご予約前のご質問はもちろん、<br>・金属アレルギーについて　・予約時間の変更 / 遅刻のご連絡<br>・営業時間外のご相談　・素材やデザインについて<br>などもLINEにて対応しております。<br>ご来店前に友達追加していただくと、当日のご案内もスムーズです。',
+        },
+        section: { menu: 'メニュー選択', guestsDate: '人数 & 日程', time: '時間帯', request: 'ご要望', customer: 'お客様情報', edit: '変更' },
+        menu: {
+          spoon: 'スプーンリング',
+          coin: 'コインリング',
+          spoonDesc: 'アンティークスプーンを<br>指輪に仕上げる体験',
+          coinDesc: '世界各地のコインを<br>指輪に仕上げる体験',
+        },
+        guests: { adults: '大人の人数', children: 'お子様の人数', childAge: '12歳以下', hint: '人数を選択すると日程が選択できます' },
+        form: {
+          notesPlaceholder: 'アレルギーや素材のご希望、その他ご要望があればご記入ください',
+          name: 'お名前',
+          namePlaceholder: '山田 花子',
+          phone: '電話番号',
+          email: 'メールアドレス',
+          reserve: 'この内容で予約する',
+          errName: 'お名前を入力してください',
+          errPhone: '正しい電話番号を入力してください',
+          errEmail: '正しいメールアドレスを入力してください',
+        },
+        modal: { title: '予約内容の確認', confirm: '予約を確定する', back: '戻る', close: '閉じる', successTitle: 'ご予約を受け付けました', successBody: 'ご予約いただきありがとうございます。<br>確認のご連絡をお送りします。', sendError: '送信に失敗しました。時間をおいて再度お試しください。' },
+        summary: { menu: 'メニュー', date: '日程', time: '時間帯', guests: '人数', name: 'お名前', phone: '電話番号', email: 'メール', notes: 'ご要望' },
+        dynamic: { adults: '大人{count}名', children: ' / お子様{count}名', full: '満席', available: '予約可' },
+        success: { title: 'ご予約ありがとうございます', msg: 'ご予約確認メールをお送りしました。<br>迷惑メールフォルダに届く場合がありますので、<br>届いていない場合はご確認ください。<br><br>ご不明な点やご相談は、<br>公式LINEよりお気軽にどうぞ。', close: 'ページを閉じる' },
+      },
     },
 
     /* ──────────────────── ENGLISH ────────────────────────── */
@@ -134,7 +172,7 @@
       },
       hero: {
         eyebrow:       'Handmade Ring Workshop',
-        copy:          'Forge your memory.',
+        copy:          'Turn memories into a ring.',
         tagline:       'Craft a ring from world coins and spoons —<br>carry your memories forever.',
         reserve:       'Book an Experience',
         address:       'Manzumachi 2-8, Sasebo',
@@ -160,16 +198,16 @@
         s02: { title: 'Visit on the Day', p: 'Please read the <a href="caution.html" class="text-link">guidelines</a> in advance and arrive at least 5 minutes before your scheduled time. We will seat you and walk you through the experience.' },
         s03: { title: 'Choose a Coin or Spoon', time: 'approx. 10 min', p: 'Select your favourite from our collection of coins and spoons gathered from around the world. The time spent deciding is all part of the experience.' },
         s04: { title: 'Ring Making', time: 'approx. 30–50 min', p: 'Our staff will guide you through every step. Hammer, bend, polish — enjoy watching your ring slowly take shape. Beginners are very welcome.' },
-        s05: { title: 'Pendant Top (Optional)', p: 'Using leftover material from ring-making, you can also craft a pendant top to wear as a necklace or keychain.<br><span class="inline-note">※ Available as an add-on from ¥1,000.</span>' },
+        s05: { title: 'Pendant Charm (Optional)', p: 'Using leftover material from ring-making, you can also craft a pendant charm to wear as a necklace or keychain.<br><span class="inline-note">※ Available as an add-on from ¥1,000.</span>' },
         s06: { title: 'Workshop Complete', p: 'Congratulations! Slip the one-of-a-kind ring onto your finger and carry today\'s special moment with you. We hope to welcome you again soon.' },
       },
       pricing: {
         label:   'PRICING',
         heading: 'Pricing',
         badge:   'Popular',
-        ring:    { cat: 'Ring Making Experience', meta1: 'Duration: 40–60 min', meta2: 'Capacity: 1–4 people', meta3: 'Age: Junior high and up', taxNote: '/person (tax incl.)' },
+        ring:    { cat: 'Ring Making Experience', meta1: 'Duration: 40–60 min', meta2: 'Capacity: 1–4 people', meta3: 'Ages 13+', taxNote: '/person (tax incl.)' },
         order:   { cat: 'Custom Ring', meta1: 'Designed to your request', meta2: 'Details via LINE' },
-        option:  { cat: 'Add-on Option', pendant: 'Pendant Top' },
+        option:  { cat: 'Add-on Option', pendant: 'Pendant Charm' },
         sale:    { cat: 'For Sale', name: 'Coin Ring', desc: 'Perfect if you\'d prefer one without the workshop.', taxNote: '(tax incl.)' },
       },
       faq: {
@@ -202,12 +240,18 @@
         caution:    'Guidelines',
       },
       mcta:    { consult: 'Chat', reserve: 'Book' },
-      loader:  { ariaLabel: 'Loading', copyJp: 'Forge your memory.' },
+      aria:    { langSwitcher: 'Language selector', quickActions: 'Quick actions', close: 'Close' },
+      alt:     { spoonRing: 'Spoon ring', coinRing: 'Coin ring', lineAdd: 'Add friend on LINE' },
+      map:     { title: '環-wa- access map' },
+      loader:  { ariaLabel: 'Loading', copyJp: 'Turn memories into a ring.' },
       burger:  { open: 'Open menu' },
       shop: {
+        meta: { title: 'Coin Ring Order | 環-wa-', desc: 'The 環-wa- online shop. Order handmade coin rings crafted from coins from around the world. ¥4,000 (tax incl.).' },
         hero:  { label: 'ONLINE SHOP', title: 'Coin Ring Order' },
         intro: 'Finished coin rings crafted from coins gathered worldwide, delivered to your door.<br>Choose your size and order online instantly.',
-        modal: { eyebrow: 'COIN RING ORDER', sizeLabel: 'RING SIZE', checkoutEmpty: 'Please select a size', checkout: 'Order in size {size}' },
+        modal: { eyebrow: 'COIN RING ORDER', priceTax: '(tax incl.)', sizeLabel: 'RING SIZE', checkoutEmpty: 'Please select a size', checkout: 'Order in size {size}' },
+        imgAlt: { coin: '{name} coin', ring: '{name} finished ring example' },
+        sizeAria: 'Size {size}',
         notes: {
           heading: 'Before You Order',
           finish:  { title: 'About the Finish', p1: 'Each coin ring is finished by hand. Minor variations in width, pattern, and texture may occur due to natural differences between individual coins.', p2: 'We do our best to match your chosen size, but slight tolerances may occur depending on the coin\'s material and thickness.' },
@@ -218,13 +262,45 @@
         backBtn: 'Back to Top',
         coins: null,
       },
+      reservePage: {
+        meta: { title: 'Reservation | 環 -wa-' },
+        header: { title: '環 -wa- Reservation' },
+        notice: {
+          label: 'Notice',
+          p1: 'Guests age 12 and under must be accompanied by a parent or guardian.<br>For the comfort of all guests, pets are not allowed inside the workshop.<br>If you would like to bring your own material, please contact us on official LINE in advance, as some materials may be difficult to process depending on their condition.',
+          p2: 'If you have any questions, feel free to contact us on official LINE.<br>Before booking, you can ask us about:<br>・metal allergies ・changes to your reservation time / late arrival<br>・requests outside business hours ・materials and designs<br>Adding us on LINE before your visit also helps us guide you smoothly on the day.',
+        },
+        section: { menu: 'Choose Menu', guestsDate: 'Guests & Date', time: 'Time', request: 'Requests', customer: 'Your Details', edit: 'Edit' },
+        menu: {
+          spoon: 'Spoon Ring',
+          coin: 'Coin Ring',
+          spoonDesc: 'Turn an antique spoon<br>into a ring',
+          coinDesc: 'Turn a coin from around the world<br>into a ring',
+        },
+        guests: { adults: 'Adults', children: 'Children', childAge: 'Age 12 and under', hint: 'Select at least one adult to choose a date' },
+        form: {
+          notesPlaceholder: 'Let us know about allergies, material preferences, or any other requests',
+          name: 'Name',
+          namePlaceholder: 'Jane Smith',
+          phone: 'Phone number',
+          email: 'Email address',
+          reserve: 'Reserve with These Details',
+          errName: 'Please enter your name',
+          errPhone: 'Please enter a valid phone number',
+          errEmail: 'Please enter a valid email address',
+        },
+        modal: { title: 'Confirm Reservation', confirm: 'Confirm Reservation', back: 'Back', close: 'Close', successTitle: 'Reservation Received', successBody: 'Thank you for your reservation.<br>We will contact you to confirm the details.', sendError: 'Your reservation could not be sent. Please try again later.' },
+        summary: { menu: 'Menu', date: 'Date', time: 'Time', guests: 'Guests', name: 'Name', phone: 'Phone', email: 'Email', notes: 'Requests' },
+        dynamic: { adults: '{count} adult(s)', children: ' / {count} child(ren)', full: 'Full', available: 'Available' },
+        success: { title: 'Thank you for your reservation', msg: 'A confirmation email has been sent.<br>Please check your spam folder if you do not see it.<br><br>If you have any questions,<br>please contact us on official LINE.', close: 'Close Page' },
+      },
     },
 
     /* ──────────────────── CHINESE (Simplified) ─────────────── */
     zh: {
       meta: {
         title: '環-wa- | 手工戒指体验 佐世保·万津町',
-        desc:  '长崎县佐世保市手工戒指体验工坊「環-wa-」。亲手打造汤匙戒指或硬币戒指。完全预约制。¥6,500起。',
+        desc:  '长崎县佐世保市手工戒指体验工坊「環-wa-」。亲手打造汤匙戒指或硬币戒指。需提前预约。¥6,500起。',
       },
       nav: {
         about:   '关于戒指',
@@ -240,7 +316,7 @@
         tagline:       '用世界各地的硬币与汤匙，<br>打造承载记忆的专属戒指体验。',
         reserve:       '预约体验',
         address:       '佐世保市万津町 2-8',
-        byReservation: '完全预约制',
+        byReservation: '需提前预约',
         hours:         '12:00 — 20:00',
       },
       about: {
@@ -269,7 +345,7 @@
         label:   '价格',
         heading: '价格介绍',
         badge:   '人气',
-        ring:    { cat: '戒指手作体验', meta1: '所需时间：40分钟〜1小时', meta2: '体验人数：1〜4人', meta3: '适用年龄：初中生以上', taxNote: '/名（税込）' },
+        ring:    { cat: '戒指手作体验', meta1: '所需时间：40分钟〜1小时', meta2: '体验人数：1〜4人', meta3: '适用年龄：初中生以上', taxNote: '/人（含税）' },
         order:   { cat: '定制戒指', meta1: '根据您的需求设计', meta2: '详情请通过LINE咨询' },
         option:  { cat: '附加选项', pendant: '吊坠头' },
         sale:    { cat: '销售商品', name: '硬币戒指', desc: '无法参与体验的朋友也欢迎选购。', taxNote: '（含税）' },
@@ -277,7 +353,7 @@
       faq: {
         heading: '常见问题',
         q01: '没有预约可以直接来店吗？',
-        a01: '本工坊为<strong>完全预约制</strong>。请通过官方LINE预约后再行前来。当日预约也可通过LINE受理（视空位情况而定）。',
+        a01: '本工坊<strong>需提前预约</strong>。请通过官方LINE预约后再行前来。当日预约也可通过LINE受理（视空位情况而定）。',
         q02: '一个人也可以体验吗？',
         a02: '当然可以。从1人到最多4人均可参加。独自前来悠闲享受的顾客也非常多。',
         q03: '小孩可以参加吗？',
@@ -298,18 +374,24 @@
       footer: {
         address:    '〒857-0877<br>长崎县佐世保市万津町２−８',
         hours:      '营业时间：12:00 〜 20:00（最后预约 19:00）',
-        byRes:      '完全预约制',
+        byRes:      '需提前预约',
         reserveBtn: '在线预约',
         copyright:  '© 2026 環-wa- All Rights Reserved.',
         caution:    '注意事项',
       },
       mcta:    { consult: '咨询', reserve: '预约体验' },
+      aria:    { langSwitcher: '语言切换', quickActions: '快捷操作', close: '关闭' },
+      alt:     { spoonRing: '汤匙戒指', coinRing: '硬币戒指', lineAdd: '添加LINE好友' },
+      map:     { title: '環-wa- 交通地图' },
       loader:  { ariaLabel: '加载中', copyJp: '将记忆铸成环。' },
       burger:  { open: '打开菜单' },
       shop: {
+        meta: { title: '硬币戒指 下单 | 環-wa-', desc: '環-wa- 在线商店。可按尺寸订购使用世界各地硬币手工制作的戒指。¥4,000（含税）。' },
         hero:  { label: 'ONLINE SHOP', title: '硬币戒指 下单' },
         intro: '将收集自世界各地的硬币打造成成品戒指，快递送达您手中。<br>请选择您希望的尺寸，即可在线直接下单。',
-        modal: { eyebrow: 'COIN RING ORDER', sizeLabel: '戒指号数', checkoutEmpty: '请选择号数', checkout: '以{size}号下单' },
+        modal: { eyebrow: 'COIN RING ORDER', priceTax: '（含税）', sizeLabel: '戒指号数', checkoutEmpty: '请选择号数', checkout: '以{size}号下单' },
+        imgAlt: { coin: '{name} 硬币', ring: '{name} 戒指成品示例' },
+        sizeAria: '{size}号',
         notes: {
           heading: '下单前请注意',
           finish:  { title: '关于成品', p1: '每一枚硬币戒指均为手工制作。由于所使用硬币的个体差异，戒指的宽度、图案呈现及质感可能存在些许差异，敬请谅解。', p2: '我们以您选择的号数为基准进行制作，但因硬币的材质和厚度不同，可能存在轻微误差。' },
@@ -319,6 +401,23 @@
         },
         backBtn: '返回首页',
         coins: null,
+      },
+      reservePage: {
+        meta: { title: '预约 | 環 -wa-' },
+        header: { title: '環 -wa- 预约' },
+        notice: {
+          label: '通知',
+          p1: '12岁以下儿童需由监护人陪同参加。<br>因店内环境限制，恕不接待携带宠物入店。<br>如需自带材料，部分材料可能因材质或状态而较难加工，建议事先通过官方LINE咨询。',
+          p2: '如有任何疑问或需要咨询，欢迎通过官方LINE联系我们。<br>预约前也可以咨询：<br>・金属过敏 ・预约时间变更 / 迟到联络<br>・营业时间外咨询 ・材料与设计<br>到店前添加LINE好友，当天到店指引也会更加顺利。',
+        },
+        section: { menu: '选择项目', guestsDate: '人数 & 日期', time: '时间段', request: '需求', customer: '顾客信息', edit: '修改' },
+        menu: { spoon: '汤匙戒指', coin: '硬币戒指', spoonDesc: '将古董汤匙<br>制作成戒指的体验', coinDesc: '将世界各地的硬币<br>制作成戒指的体验' },
+        guests: { adults: '成人数', children: '儿童数', childAge: '12岁以下', hint: '请选择人数后再选择日期' },
+        form: { notesPlaceholder: '如有过敏、材料偏好或其他需求，请在此填写', name: '姓名', namePlaceholder: '王 小美', phone: '电话号码', email: '电子邮箱', reserve: '按此内容预约', errName: '请输入姓名', errPhone: '请输入正确的电话号码', errEmail: '请输入正确的电子邮箱' },
+        modal: { title: '确认预约内容', confirm: '确认预约', back: '返回', close: '关闭', successTitle: '已受理您的预约', successBody: '感谢您的预约。<br>我们会再与您联系确认。', sendError: '发送失败。请稍后再试。' },
+        summary: { menu: '项目', date: '日期', time: '时间段', guests: '人数', name: '姓名', phone: '电话', email: '邮箱', notes: '需求' },
+        dynamic: { adults: '成人{count}人', children: ' / 儿童{count}人', full: '已满', available: '可预约' },
+        success: { title: '感谢您的预约', msg: '预约确认邮件已发送。<br>如未收到，请查看垃圾邮件文件夹。<br><br>如有疑问或需要咨询，<br>欢迎通过官方LINE联系我们。', close: '关闭页面' },
       },
     },
 
@@ -333,12 +432,12 @@
         flow:    '체험 흐름',
         pricing: '요금',
         faq:     'FAQ',
-        shop:    '쇼핑',
+        shop:    '샵',
         reserve: '예약하기',
       },
       hero: {
         eyebrow:       'Handmade Ring Workshop',
-        copy:          '기억을, 환에.',
+        copy:          '기억을 반지로.',
         tagline:       '세계의 동전과 스푼으로 만드는,<br>기억을 담은 반지 체험.',
         reserve:       '체험 예약하기',
         address:       '사세보시 만쓰초 2-8',
@@ -406,12 +505,18 @@
         caution:    '주의사항',
       },
       mcta:    { consult: '문의하기', reserve: '체험 예약' },
-      loader:  { ariaLabel: '로딩 중', copyJp: '기억을, 환에.' },
+      aria:    { langSwitcher: '언어 전환', quickActions: '빠른 작업', close: '닫기' },
+      alt:     { spoonRing: '스푼링', coinRing: '코인링', lineAdd: 'LINE 친구 추가' },
+      map:     { title: '環-wa- 오시는 길 지도' },
+      loader:  { ariaLabel: '로딩 중', copyJp: '기억을 반지로.' },
       burger:  { open: '메뉴 열기' },
       shop: {
+        meta: { title: '코인링 오더 | 環-wa-', desc: '環-wa- 온라인 샵. 세계 각지의 동전으로 만든 수제 코인링을 사이즈에 맞춰 주문하실 수 있습니다. ¥4,000（세금 포함）.' },
         hero:  { label: 'ONLINE SHOP', title: '코인링 오더' },
         intro: '세계 각지에서 수집한 동전으로 만든 완성품 반지를 배송해 드립니다.<br>원하시는 사이즈를 선택하고 온라인으로 바로 주문하세요.',
-        modal: { eyebrow: 'COIN RING ORDER', sizeLabel: '반지 사이즈', checkoutEmpty: '사이즈를 선택해 주세요', checkout: '{size}호로 주문하기' },
+        modal: { eyebrow: 'COIN RING ORDER', priceTax: '（세금 포함）', sizeLabel: '반지 사이즈', checkoutEmpty: '사이즈를 선택해 주세요', checkout: '{size}호로 주문하기' },
+        imgAlt: { coin: '{name} 동전', ring: '{name} 반지 완성 예시' },
+        sizeAria: '{size}호',
         notes: {
           heading: '주문 전 안내',
           finish:  { title: '완성품에 대하여', p1: '코인링은 하나하나 수작업으로 완성합니다. 사용하는 동전의 개체 차이로 인해 반지의 너비·무늬·질감에 약간의 차이가 생길 수 있습니다. 미리 양해 부탁드립니다.', p2: '사이즈는 선택하신 호수를 기준으로 제작하지만, 동전의 소재와 두께에 따라 약간의 오차가 발생할 수 있습니다.' },
@@ -421,6 +526,23 @@
         },
         backBtn: '메인 페이지로 돌아가기',
         coins: null,
+      },
+      reservePage: {
+        meta: { title: '예약 | 環 -wa-' },
+        header: { title: '環 -wa- 예약' },
+        notice: {
+          label: '안내',
+          p1: '12세 이하 고객은 보호자 동반이 필요합니다.<br>매장 환경상 반려동물 동반 입장은 삼가 주세요.<br>개인 소재를 가져오시는 경우, 소재나 상태에 따라 가공이 어려울 수 있으니 사전에 공식 LINE으로 상담해 주시면 원활하게 안내해 드릴 수 있습니다.',
+          p2: '궁금한 점이나 상담이 필요하시면 공식 LINE으로 편하게 문의해 주세요.<br>예약 전에도 다음 내용을 상담하실 수 있습니다.<br>・금속 알레르기 ・예약 시간 변경 / 지각 연락<br>・영업시간 외 상담 ・소재와 디자인<br>방문 전 친구 추가를 해 두시면 당일 안내도 더 원활합니다.',
+        },
+        section: { menu: '메뉴 선택', guestsDate: '인원 & 일정', time: '시간대', request: '요청사항', customer: '고객 정보', edit: '변경' },
+        menu: { spoon: '스푼링', coin: '코인링', spoonDesc: '앤티크 스푼을<br>반지로 완성하는 체험', coinDesc: '세계 각지의 동전을<br>반지로 완성하는 체험' },
+        guests: { adults: '성인 인원', children: '어린이 인원', childAge: '12세 이하', hint: '인원을 선택하면 일정을 선택할 수 있습니다' },
+        form: { notesPlaceholder: '알레르기, 소재 희망사항 또는 기타 요청사항을 적어 주세요', name: '이름', namePlaceholder: '김 하나', phone: '전화번호', email: '이메일 주소', reserve: '이 내용으로 예약하기', errName: '이름을 입력해 주세요', errPhone: '올바른 전화번호를 입력해 주세요', errEmail: '올바른 이메일 주소를 입력해 주세요' },
+        modal: { title: '예약 내용 확인', confirm: '예약 확정하기', back: '돌아가기', close: '닫기', successTitle: '예약이 접수되었습니다', successBody: '예약해 주셔서 감사합니다.<br>확인 연락을 드리겠습니다.', sendError: '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.' },
+        summary: { menu: '메뉴', date: '일정', time: '시간대', guests: '인원', name: '이름', phone: '전화번호', email: '이메일', notes: '요청사항' },
+        dynamic: { adults: '성인 {count}명', children: ' / 어린이 {count}명', full: '마감', available: '예약 가능' },
+        success: { title: '예약 감사합니다', msg: '예약 확인 메일을 보내드렸습니다.<br>메일이 보이지 않는 경우 스팸함도 확인해 주세요.<br><br>궁금한 점이나 상담은<br>공식 LINE으로 편하게 문의해 주세요.', close: '페이지 닫기' },
       },
     },
   };
@@ -456,9 +578,28 @@
       if (v !== undefined) el.setAttribute('aria-label', v);
     });
 
+    /* attribute replacements */
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var v = get(lang, el.dataset.i18nPlaceholder);
+      if (v !== undefined) el.setAttribute('placeholder', v);
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+      var v = get(lang, el.dataset.i18nAlt);
+      if (v !== undefined) el.setAttribute('alt', v);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+      var v = get(lang, el.dataset.i18nTitle);
+      if (v !== undefined) el.setAttribute('title', v);
+    });
+
     /* document title */
-    var title = get(lang, 'meta.title');
+    var pageTitleKey = document.body && document.body.dataset.i18nPageTitle;
+    var title = pageTitleKey ? get(lang, pageTitleKey) : get(lang, 'meta.title');
     if (title) document.title = title;
+    var pageDescKey = document.body && document.body.dataset.i18nPageDesc;
+    var metaDesc = pageDescKey ? get(lang, pageDescKey) : get(lang, 'meta.desc');
+    var descEl = document.querySelector('meta[name="description"]');
+    if (metaDesc && descEl) descEl.setAttribute('content', metaDesc);
 
     /* active state on lang buttons */
     document.querySelectorAll('.lang-btn').forEach(function (b) {
